@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Options, BFEND_OPTIONS } from '../options.type';
+import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 
 export interface UploadResult {
   size: number;
@@ -11,10 +11,10 @@ export interface UploadResult {
 }
 
 @Injectable()
-export class UploadService {
+export class BfUploadService {
   url = `${this.options.api_base_uri}/upload`;
 
-  constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: Options) {}
+  constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 
   post(files: { [key: string]: File }, url = this.url): Observable<UploadResult> {
     const formData = new FormData();

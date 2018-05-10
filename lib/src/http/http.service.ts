@@ -11,7 +11,7 @@ import 'rxjs/add/observable/of';
 
 import { of } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators/delay';
-import { Options, BFEND_OPTIONS } from '../options.type';
+import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 
 export interface ManagedOptions {
   auto_loading: boolean;
@@ -28,7 +28,7 @@ interface State {
 export interface SearchCriteria {[index: string]: any;}
 
 @Injectable()
-export class HttpService {
+export class BfHttpService {
   private loadingSubject = new Subject<boolean>();
 
   readonly loading$ = this.loadingSubject
@@ -43,7 +43,7 @@ export class HttpService {
     .filter(state => state.diff === 0 || (state.diff === 1 && state.show))
     .switchMap(state => of(state.diff === 1).pipe(delay(10)));
 
-  constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: Options) {}
+  constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 
   url(url) {
     return `${this.options.api_base_uri}${url}`;

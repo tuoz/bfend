@@ -5,22 +5,22 @@ import { AngularWebStorageModule } from 'angular-web-storage';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
-import { AppService } from './src/app.service';
-import { HttpService } from './src/http/http.service';
-import { BFEND_OPTIONS, getOptions, Options, setOptions } from './src/options.type';
-import { SettingsService } from './src/settings.service';
-import { MenuService } from './src/menu.service';
-import { ACLService } from './src/auth/acl.service';
-import { TokenService, TokenStorage } from './src/auth/token.service';
-import { TitleService } from './src/title.service';
-import { AuthService } from './src/auth/auth.service';
-import { AuthGuard } from './src/auth/auth-guard.service';
-import { UploadService } from './src/http/upload.service';
-import { HttpManagedInterceptor } from './src/http/http-managed.interceptor';
-import { AuthInterceptor } from './src/auth/auth.interceptor';
-import { HttpInterceptor } from './src/http/http.interceptor';
+import { BfAppService } from './src/app.service';
+import { BfHttpService } from './src/http/http.service';
+import { BFEND_OPTIONS, getOptions, BfendOptions, setOptions } from './src/options.type';
+import { BfSettingsService } from './src/settings.service';
+import { BfMenuService } from './src/menu.service';
+import { BfACLService } from './src/auth/acl.service';
+import { TokenService, BfTokenStorage } from './src/auth/token.service';
+import { BfTitleService } from './src/title.service';
+import { BfAuthService } from './src/auth/auth.service';
+import { BfAuthGuard } from './src/auth/auth-guard.service';
+import { BfUploadService } from './src/http/upload.service';
+import { BfHttpManagedInterceptor } from './src/http/http-managed.interceptor';
+import { BfAuthInterceptor } from './src/auth/auth.interceptor';
+import { BfHttpInterceptor } from './src/http/http.interceptor';
 
-export function jwtOptionsFactory(storage: TokenStorage) {
+export function jwtOptionsFactory(storage: BfTokenStorage) {
   return {
     skipWhenExpired: false,
     whitelistedDomains: [/^null$/],
@@ -30,7 +30,7 @@ export function jwtOptionsFactory(storage: TokenStorage) {
   };
 }
 
-export function startupServiceFactory(appService: AppService): Function {
+export function startupServiceFactory(appService: BfAppService): Function {
   return () => appService.startup();
 }
 
@@ -43,7 +43,7 @@ export function startupServiceFactory(appService: AppService): Function {
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
         useFactory: jwtOptionsFactory,
-        deps: [TokenStorage],
+        deps: [BfTokenStorage],
       }
     }),
     NgZorroAntdModule.forRoot()
@@ -55,7 +55,7 @@ export class BfendCoreModule {
     throwIfAlreadyLoaded(parentModule, 'BfendCoreModule');
   }
 
-  static forRoot(options: Partial<Options>): ModuleWithProviders {
+  static forRoot(options: Partial<BfendOptions>): ModuleWithProviders {
 
     setOptions({
       ...getOptions(),
@@ -65,29 +65,29 @@ export class BfendCoreModule {
     return {
       ngModule: BfendCoreModule,
       providers: [
-        AppService,
-        HttpService,
-        SettingsService,
-        MenuService,
-        TitleService,
+        BfAppService,
+        BfHttpService,
+        BfSettingsService,
+        BfMenuService,
+        BfTitleService,
         TokenService,
-        TokenStorage,
-        ACLService,
-        AuthService,
-        AuthGuard,
-        UploadService,
+        BfTokenStorage,
+        BfACLService,
+        BfAuthService,
+        BfAuthGuard,
+        BfUploadService,
         {provide: NZ_I18N, useValue: zh_CN},
         {provide: BFEND_OPTIONS, useValue: getOptions()},
         {
           provide: APP_INITIALIZER,
           useFactory: startupServiceFactory,
-          deps: [AppService],
+          deps: [BfAppService],
           multi: true
         },
         // 注意：这里后添加的先执行
-        {provide: HTTP_INTERCEPTORS, useClass: HttpManagedInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: BfHttpManagedInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: BfAuthInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: BfHttpInterceptor, multi: true},
       ]
     };
   }

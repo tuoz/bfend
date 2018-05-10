@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SettingsService } from '../../settings.service';
-import { AppService } from '../../app.service';
-import { ChangePasswordComponent } from './change-password.component';
+import { BfSettingsService } from '../../settings.service';
+import { BfAppService } from '../../app.service';
+import { BfChangePasswordComponent } from './change-password.component';
 import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
@@ -39,8 +39,8 @@ import { NzModalService } from 'ng-zorro-antd';
   `,
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent {
-  constructor(private nzModal: NzModalService, public settings: SettingsService, public app: AppService) {
+export class BfHeaderComponent {
+  constructor(private nzModal: NzModalService, public settings: BfSettingsService, public app: BfAppService) {
   }
 
   toggleAside() {
@@ -54,7 +54,7 @@ export class HeaderComponent {
   changePassword() {
     const modal = this.nzModal.create({
       nzTitle: '修改密码',
-      nzContent: ChangePasswordComponent,
+      nzContent: BfChangePasswordComponent,
       nzMaskClosable: false
     });
 

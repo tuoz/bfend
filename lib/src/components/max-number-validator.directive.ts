@@ -3,9 +3,9 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, Validators
 
 @Directive({
   selector: '[bfMaxNumber]',
-  providers: [{provide: NG_VALIDATORS, useExisting: MaxNumberValidatorDirective, multi: true}]
+  providers: [{provide: NG_VALIDATORS, useExisting: BfMaxNumberValidatorDirective, multi: true}]
 })
-export class MaxNumberValidatorDirective implements Validator {
+export class BfMaxNumberValidatorDirective implements Validator {
 
   @Input() maxNumber: number;
 

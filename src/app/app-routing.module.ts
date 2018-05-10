@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './auth/login.component';
-import { AuthGuard } from 'bfend';
+import { BfAuthGuard } from 'bfend';
 import { LayoutComponent } from './shared/layout.component';
 
 const routes: Route[] = [
@@ -14,15 +14,15 @@ const routes: Route[] = [
       // 仪表盘
       {
         path: 'dashboard',
-        canLoad: [AuthGuard],
+        canLoad: [BfAuthGuard],
         data: {acl: 'dashboard.*'},
-        canActivateChild: [AuthGuard],
+        canActivateChild: [BfAuthGuard],
         loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'table',
         data: {acl: 'table.*'},
-        canActivateChild: [AuthGuard],
+        canActivateChild: [BfAuthGuard],
         loadChildren: 'app/table/table.module#TableModule',
       }
     ]

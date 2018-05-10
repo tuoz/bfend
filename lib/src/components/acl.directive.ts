@@ -1,13 +1,13 @@
 import { Directive, Input, ElementRef, Renderer2, OnDestroy, OnInit, AfterViewInit  } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ACLService, ACLType } from '../auth/acl.service';
+import { BfACLService, ACLType } from '../auth/acl.service';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[acl]'
 })
-export class ACLDirective implements OnDestroy, OnInit, AfterViewInit {
+export class BfACLDirective implements OnDestroy, OnInit, AfterViewInit {
   private value: string | string[] | ACLType;
   private sub: Subscription;
 
@@ -28,7 +28,7 @@ export class ACLDirective implements OnDestroy, OnInit, AfterViewInit {
     }
   }
 
-  constructor(private el: ElementRef, private renderer: Renderer2, private srv: ACLService) {}
+  constructor(private el: ElementRef, private renderer: Renderer2, private srv: BfACLService) {}
 
   ngAfterViewInit() {
     this.judge();

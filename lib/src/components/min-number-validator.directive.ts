@@ -3,9 +3,9 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, Validators
 
 @Directive({
   selector: '[bfMinNumber]',
-  providers: [{provide: NG_VALIDATORS, useExisting: MinNumberValidatorDirective, multi: true}]
+  providers: [{provide: NG_VALIDATORS, useExisting: BfMinNumberValidatorDirective, multi: true}]
 })
-export class MinNumberValidatorDirective implements Validator {
+export class BfMinNumberValidatorDirective implements Validator {
 
   @Input() minNumber: number;
 

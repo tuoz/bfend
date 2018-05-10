@@ -1,38 +1,22 @@
 import { Inject, Injectable, Injector } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorageService } from 'angular-web-storage';
-import { Options, BFEND_OPTIONS } from '../options.type';
+import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 
 export interface TokenData {
-  /**
-   * Token 值
-   */
   access_token: string;
-  /**
-   * Token 类型
-   */
   token_type?: string;
-  /**
-   * TOKEN过期时间，格式：timestamp
-   */
   expires_in?: number;
-  /**
-   * 刷新 Token
-   */
   refresh_token?: string;
-
-  /**
-   * 刷新 Token 有效时间，格式：timestamp
-   */
   refresh_token_valid_time?: number;
 
   [key: string]: any;
 }
 
 @Injectable()
-export class TokenStorage {
+export class BfTokenStorage {
 
-  constructor(private storage: LocalStorageService, @Inject(BFEND_OPTIONS) private options: Options) {}
+  constructor(private storage: LocalStorageService, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 
   get key() {
     return `${this.options.app_key}-token`;
@@ -66,15 +50,12 @@ export class TokenStorage {
   }
 }
 
-/**
- * 基于Token认证
- */
 @Injectable()
 export class TokenService {
   constructor(
     private injector: Injector,
     private helper: JwtHelperService,
-    private storage: TokenStorage
+    private storage: BfTokenStorage
   ) {
   }
 

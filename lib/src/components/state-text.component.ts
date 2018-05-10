@@ -11,7 +11,7 @@ import { Component, Input, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class StateTextComponent implements OnInit {
+export class BfStateTextComponent implements OnInit {
 
   @Input() value;
 

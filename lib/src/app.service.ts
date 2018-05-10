@@ -6,21 +6,21 @@ import { Subject } from 'rxjs/Subject';
 import { NzMessageService } from 'ng-zorro-antd';
 import { merge } from 'rxjs/observable/merge';
 
-import { MenuService } from './menu.service';
-import { BFEND_OPTIONS, Options } from './options.type';
-import { SettingsService } from './settings.service';
-import { ACLService } from './auth/acl.service';
-import { TitleService } from './title.service';
-import { AuthService } from './auth/auth.service';
+import { BfMenuService } from './menu.service';
+import { BFEND_OPTIONS, BfendOptions } from './options.type';
+import { BfSettingsService } from './settings.service';
+import { BfACLService } from './auth/acl.service';
+import { BfTitleService } from './title.service';
+import { BfAuthService } from './auth/auth.service';
 import { User } from './auth/user.type';
-import { HttpService } from './http/http.service';
+import { BfHttpService } from './http/http.service';
 
 /**
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
  */
 @Injectable()
-export class AppService {
+export class BfAppService {
 
   private _user: User;
 
@@ -35,13 +35,13 @@ export class AppService {
   constructor(
     private injector: Injector,
     private httpClient: HttpClient,
-    private httpService: HttpService,
-    private menuService: MenuService,
-    private settingService: SettingsService,
-    private aclService: ACLService,
-    private titleService: TitleService,
-    private authService: AuthService,
-    @Inject(BFEND_OPTIONS) public options: Options
+    private httpService: BfHttpService,
+    private menuService: BfMenuService,
+    private settingService: BfSettingsService,
+    private aclService: BfACLService,
+    private titleService: BfTitleService,
+    private authService: BfAuthService,
+    @Inject(BFEND_OPTIONS) public options: BfendOptions
   ) {}
 
   /**

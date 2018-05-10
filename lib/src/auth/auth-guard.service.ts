@@ -4,16 +4,16 @@ import { NzMessageService } from 'ng-zorro-antd';
 
 import 'rxjs/add/operator/concatAll';
 
-import { AuthService } from './auth.service';
-import { ACLService, ACLType } from './acl.service';
+import { BfAuthService } from './auth.service';
+import { BfACLService, ACLType } from './acl.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class BfAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private router: Router,
     private nzMessage: NzMessageService,
-    private authService: AuthService,
-    private aclService: ACLService
+    private authService: BfAuthService,
+    private aclService: BfACLService
   ) {
   }
 

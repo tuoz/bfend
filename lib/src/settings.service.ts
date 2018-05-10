@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
-import { BFEND_OPTIONS, Options } from './options.type';
+import { BFEND_OPTIONS, BfendOptions } from './options.type';
 
 export interface App {
   name?: string;
@@ -18,11 +18,11 @@ export interface Layout {
 }
 
 @Injectable()
-export class SettingsService {
+export class BfSettingsService {
 
   constructor(
     private storage: LocalStorageService,
-    @Inject(BFEND_OPTIONS) private options: Options) {}
+    @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 
   /**
    * App 基础信息

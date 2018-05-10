@@ -9,7 +9,7 @@ import { NzModalRef, NzModalComponent } from 'ng-zorro-antd';
   </nz-spin>
   `,
 })
-export class ModalProxyComponent implements OnInit, OnChanges {
+export class BfModalProxyComponent implements OnInit, OnChanges {
 
   private modal: NzModalComponent;
 

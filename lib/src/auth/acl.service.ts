@@ -29,7 +29,7 @@ type Mutation = (rules: ACLType) => ACLType;
  * 访问控制服务
  */
 @Injectable()
-export class ACLService {
+export class BfACLService {
   rules$: Observable<ACLType>;
 
   private rules: ACLType = {};

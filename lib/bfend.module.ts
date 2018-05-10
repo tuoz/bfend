@@ -5,47 +5,47 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgProgressModule } from 'ngx-progressbar';
 
-import { LayoutComponent } from './src/components/layout/layout.component';
-import { FullScreenComponent } from './src/components/layout/fullscreen.component';
-import { HeaderComponent } from './src/components/layout/header.component';
-import { AsideComponent } from './src/components/layout/aside.component';
-import { FooterComponent } from './src/components/layout/footer.component';
-import { PageComponent } from './src/components/layout/page.component';
-import { ModalProxyComponent } from './src/components/modal-proxy.component';
-import { StateTextComponent } from './src/components/state-text.component';
-import { ChangePasswordComponent } from './src/components/layout/change-password.component';
-import { ACLDirective } from './src/components/acl.directive';
-import { ConfirmationValidatorDirective } from './src/components/confirmation-validator.directive';
-import { DatetimeValidatorDirective } from './src/components/datetime-validator.directive';
-import { MinNumberValidatorDirective } from './src/components/min-number-validator.directive';
-import { MaxNumberValidatorDirective } from './src/components/max-number-validator.directive';
-import { YuanPipe } from './src/components/yuan.pipe';
+import { BfLayoutComponent } from './src/components/layout/layout.component';
+import { BfFullScreenComponent } from './src/components/layout/fullscreen.component';
+import { BfHeaderComponent } from './src/components/layout/header.component';
+import { BfAsideComponent } from './src/components/layout/aside.component';
+import { BfFooterComponent } from './src/components/layout/footer.component';
+import { BfPageComponent } from './src/components/layout/page.component';
+import { BfModalProxyComponent } from './src/components/modal-proxy.component';
+import { BfStateTextComponent } from './src/components/state-text.component';
+import { BfChangePasswordComponent } from './src/components/layout/change-password.component';
+import { BfACLDirective } from './src/components/acl.directive';
+import { BfConfirmationValidatorDirective } from './src/components/confirmation-validator.directive';
+import { BfDatetimeValidatorDirective } from './src/components/datetime-validator.directive';
+import { BfMinNumberValidatorDirective } from './src/components/min-number-validator.directive';
+import { BfMaxNumberValidatorDirective } from './src/components/max-number-validator.directive';
+import { BfYuanPipe } from './src/components/yuan.pipe';
 
 const COMPONENTS = [
-  LayoutComponent,
-  FullScreenComponent,
-  HeaderComponent,
-  AsideComponent,
-  FooterComponent,
-  PageComponent,
-  ModalProxyComponent,
-  StateTextComponent,
-  ChangePasswordComponent
+  BfLayoutComponent,
+  BfFullScreenComponent,
+  BfHeaderComponent,
+  BfAsideComponent,
+  BfFooterComponent,
+  BfPageComponent,
+  BfModalProxyComponent,
+  BfStateTextComponent,
+  BfChangePasswordComponent
 ];
 
 const ENTRY_COMPONENTS = [
-  ChangePasswordComponent
+  BfChangePasswordComponent
 ];
 
 const DIRECTIVES = [
-  ACLDirective,
-  ConfirmationValidatorDirective,
-  DatetimeValidatorDirective,
-  MinNumberValidatorDirective,
-  MaxNumberValidatorDirective
+  BfACLDirective,
+  BfConfirmationValidatorDirective,
+  BfDatetimeValidatorDirective,
+  BfMinNumberValidatorDirective,
+  BfMaxNumberValidatorDirective
 ];
 const PIPES = [
-  YuanPipe
+  BfYuanPipe
 ];
 
 @NgModule({

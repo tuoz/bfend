@@ -27,7 +27,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
   `,
   styleUrls: ['./page.component.less']
 })
-export class PageComponent {
+export class BfPageComponent {
   @Input() caption: string;
 
   private _description: string | TemplateRef<void>;

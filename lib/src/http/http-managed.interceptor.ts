@@ -13,12 +13,12 @@ import 'zone.js';
 
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
-import { ApiError } from './api.error';
-import { HTTP_MANAGE_ZONE, HttpService } from './http.service';
+import { BfApiError } from './api.error';
+import { HTTP_MANAGE_ZONE, BfHttpService } from './http.service';
 
 @Injectable()
-export class HttpManagedInterceptor implements HttpInterceptorInterface {
-  constructor(private http: HttpService, private nzMessage: NzMessageService) {
+export class BfHttpManagedInterceptor implements HttpInterceptorInterface {
+  constructor(private http: BfHttpService, private nzMessage: NzMessageService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,7 +31,7 @@ export class HttpManagedInterceptor implements HttpInterceptorInterface {
       })
       .catch(err => {
         if (this.isHandleError(req)) {
-          if (err instanceof ApiError) {
+          if (err instanceof BfApiError) {
             this.nzMessage.error(err.toString(), {nzDuration: 3000});
           } else if (err instanceof HttpErrorResponse) {
             switch (err.status) {

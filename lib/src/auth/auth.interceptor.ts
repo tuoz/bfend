@@ -7,16 +7,16 @@ import { NzMessageService } from 'ng-zorro-antd';
 
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/debounceTime';
-import { AppService } from '../app.service';
+import { BfAppService } from '../app.service';
 
 /**
- * TOKEN拦截器，其注册细节见 `app.module.ts`
+ * 授权状态拦截器
  */
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class BfAuthInterceptor implements HttpInterceptor {
   private showUnauthenticatedSubject = new Subject();
 
-  constructor(private router: Router, private nzMessage: NzMessageService, private app: AppService) {
+  constructor(private router: Router, private nzMessage: NzMessageService, private app: BfAppService) {
     this.showUnauthenticatedSubject
       .debounceTime(500)
       .subscribe(() => {

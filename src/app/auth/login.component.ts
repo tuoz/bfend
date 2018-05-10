@@ -7,8 +7,8 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/combineLatest';
 
-import { AppService } from 'bfend';
-import { AuthService } from 'bfend';
+import { BfAppService } from 'bfend';
+import { BfAuthService } from 'bfend';
 
 @Component({
   templateUrl: './login.component.html',
@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private nzMessage: NzMessageService,
-    private appService: AppService,
-    private authService: AuthService,
+    private appService: BfAppService,
+    private authService: BfAuthService,
   ) {
     this.form = fb.group({
       username: [null, Validators.required],

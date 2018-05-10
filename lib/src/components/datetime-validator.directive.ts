@@ -4,9 +4,9 @@ import { datetimeValidator } from '../utils/form';
 
 @Directive({
   selector: '[bfDatetime]',
-  providers: [{provide: NG_VALIDATORS, useExisting: DatetimeValidatorDirective, multi: true}]
+  providers: [{provide: NG_VALIDATORS, useExisting: BfDatetimeValidatorDirective, multi: true}]
 })
-export class DatetimeValidatorDirective implements Validator {
+export class BfDatetimeValidatorDirective implements Validator {
 
   @Input() appConfirmation: string;
 

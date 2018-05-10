@@ -3,7 +3,7 @@ import { distinct, filter, map, publishReplay, refCount, scan, tap } from 'rxjs/
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { ACLService, ACLType } from './auth/acl.service';
+import { BfACLService, ACLType } from './auth/acl.service';
 import { Injectable } from '@angular/core';
 
 export interface Menu {
@@ -50,7 +50,7 @@ export interface Menu {
 type Mutation = (menus: Menu[]) => Menu[];
 
 @Injectable()
-export class MenuService {
+export class BfMenuService {
   menus$: Observable<Menu[]>;
 
   private data: Menu[] = [];
@@ -67,7 +67,7 @@ export class MenuService {
 
   valid$: Observable<boolean>;
 
-  constructor(private aclService: ACLService) {
+  constructor(private aclService: BfACLService) {
     // 最新的菜单数据
     this.menus$ = this.updateSubject.pipe(
       scan((menus: Menu[], mutation: Mutation) => [...mutation(menus)], []),

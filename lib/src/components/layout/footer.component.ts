@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SettingsService } from '../../settings.service';
+import { BfSettingsService } from '../../settings.service';
 
 @Component({
   selector: 'bf-footer',
@@ -11,9 +11,9 @@ import { SettingsService } from '../../settings.service';
     </p>
   `
 })
-export class FooterComponent {
+export class BfFooterComponent {
   @Input() padding = false;
 
-  constructor(public settings: SettingsService) {
+  constructor(public settings: BfSettingsService) {
   }
 }

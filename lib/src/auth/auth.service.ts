@@ -9,16 +9,16 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/operators/refCount';
-import { Options, BFEND_OPTIONS } from '../options.type';
+import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 
 import { User } from './user.type';
 import { TokenData, TokenService } from './token.service';
-import { ACLService } from './acl.service';
+import { BfACLService } from './acl.service';
 
 export type AuthEvent = 'logged-in' | 'logout';
 
 @Injectable()
-export class AuthService {
+export class BfAuthService {
 
   private eventSubject = new Subject<AuthEvent>();
   readonly event$ = this.eventSubject.asObservable();
@@ -46,9 +46,9 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private aclService: ACLService,
+    private aclService: BfACLService,
     private tokenService: TokenService,
-    @Inject(BFEND_OPTIONS) private options: Options
+    @Inject(BFEND_OPTIONS) private options: BfendOptions
   ) {}
 
   isLoggedIn() {

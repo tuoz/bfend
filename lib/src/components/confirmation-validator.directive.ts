@@ -4,9 +4,9 @@ import { confirmationValidator } from '../utils/form';
 
 @Directive({
   selector: '[bfConfirm]',
-  providers: [{provide: NG_VALIDATORS, useExisting: ConfirmationValidatorDirective, multi: true}]
+  providers: [{provide: NG_VALIDATORS, useExisting: BfConfirmationValidatorDirective, multi: true}]
 })
-export class ConfirmationValidatorDirective implements Validator {
+export class BfConfirmationValidatorDirective implements Validator {
 
   @Input() confirm: string;
 

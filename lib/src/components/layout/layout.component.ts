@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { SettingsService } from '../../settings.service';
-import { AppService } from '../../app.service';
+import { BfSettingsService } from '../../settings.service';
+import { BfAppService } from '../../app.service';
 import { NgProgress } from 'ngx-progressbar';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -36,14 +36,14 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./layout.component.less'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutComponent implements OnInit, OnDestroy {
+export class BfLayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
   private sub = new Subscription();
 
   constructor(
     private ngProgress: NgProgress,
-    private app: AppService,
-    public settings: SettingsService
+    private app: BfAppService,
+    public settings: BfSettingsService
   ) {
     this.loading$ = this.app.loading$;
   }

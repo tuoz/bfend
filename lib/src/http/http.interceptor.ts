@@ -13,12 +13,11 @@ import 'zone.js';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { ApiError } from './api.error';
+import { BfApiError } from './api.error';
 
 @Injectable()
-export class HttpInterceptor implements HttpInterceptorInterface {
-  constructor() {
-  }
+export class BfHttpInterceptor implements HttpInterceptorInterface {
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next
@@ -36,7 +35,7 @@ export class HttpInterceptor implements HttpInterceptorInterface {
         ) {
           // 将接口错误转为异常
           if (res.body.code > 0) {
-            throw new ApiError(res.body.code, res.body.msg, res.body.payload);
+            throw new BfApiError(res.body.code, res.body.msg, res.body.payload);
           }
 
           // 将返回结构控制字段去除掉，直接返回数据字段
@@ -46,7 +45,7 @@ export class HttpInterceptor implements HttpInterceptorInterface {
         return res;
       })
       .catch(err => {
-        if (!(err instanceof ApiError || err instanceof HttpErrorResponse)) {
+        if (!(err instanceof BfApiError || err instanceof HttpErrorResponse)) {
           console.error(err);
         }
 

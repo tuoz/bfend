@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalProxyComponent } from '../modal-proxy.component';
+import { BfModalProxyComponent } from '../modal-proxy.component';
 import { NzMessageService } from 'ng-zorro-antd';
 import { MeApi } from '../../api/me.api';
 import { confirmationValidator, touchForm } from '../../utils/form';
@@ -47,12 +47,12 @@ import { tap } from 'rxjs/operators/tap'
   `
 })
 
-export class ChangePasswordComponent implements OnInit {
+export class BfChangePasswordComponent implements OnInit {
   form: FormGroup;
   submitting = false;
 
-  @ViewChild(ModalProxyComponent)
-  private modal: ModalProxyComponent;
+  @ViewChild(BfModalProxyComponent)
+  private modal: BfModalProxyComponent;
 
   constructor(
     private fb: FormBuilder,

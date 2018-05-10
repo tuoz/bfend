@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Menu, MenuService } from '../../menu.service';
+import { Menu, BfMenuService } from '../../menu.service';
 
 @Component({
   selector: 'bf-aside',
@@ -74,10 +74,10 @@ import { Menu, MenuService } from '../../menu.service';
   `,
   styleUrls: ['./aside.component.less']
 })
-export class AsideComponent implements OnInit {
+export class BfAsideComponent implements OnInit {
   menus$: Observable<Menu[]>;
 
-  constructor(private menuService: MenuService) {
+  constructor(private menuService: BfMenuService) {
   }
 
   ngOnInit() {
