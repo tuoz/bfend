@@ -9,6 +9,9 @@
 # dependencies
 /node_modules
 
+# build
+/publish
+
 # IDEs and editors
 /.idea
 .project
@@ -42,3 +45,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Local environment
+.env

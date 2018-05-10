@@ -57,6 +57,10 @@
     "styleExt": "less",
     "component": {
       "inlineStyle": true,
-      "inlineTemplate": true}
+      "inlineTemplate": true
+    },
+    "serve": {
+      "proxyConfig": "./proxy.conf.js"
+    }
   }
 }

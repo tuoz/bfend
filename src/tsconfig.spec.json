@@ -7,7 +7,15 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "bfend": [
+        "../lib/index"
+      ],
+      "bfend/*": [
+        "../lib/*"
+      ]
+    }
   },
   "files": [
     "test.ts"

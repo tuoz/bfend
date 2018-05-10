@@ -1,0 +1,48 @@
+@import '../../styles/theme';
+
+.container {
+  min-height: 100%;
+  background-color: #f0f2f5;
+  background-image: url('../../assets/img/login-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center 110px;
+  background-size: 100%;
+}
+
+.login {
+  width: 360px;
+  padding: 112px 0 24px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 50%;
+  margin: 0 auto 30px auto;
+
+  img {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 30px;
+  color: @text-color-secondary;
+  font-family: 'PingFang SC', 'Microsoft YaHei', simhei, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+@media (max-width: @screen-md-min) {
+  .container {
+      background: none;
+  }
+
+  .login {
+    padding: 32px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}

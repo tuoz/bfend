@@ -1,0 +1,45 @@
+@import "~ng-zorro-antd/src/ng-zorro-antd.less";
+@import "~simple-line-icons/less/simple-line-icons.less";
+@import "./theme.less";
+@import "./utils.less";
+
+.acl__hide {
+  display: none !important;
+}
+
+body {
+  padding-right: 0 !important; // NzModal弹出的时候，不知道为什么，会多加一个 padding
+}
+
+.search-form {
+  margin-bottom: 24px;
+
+  &.ant-form-inline .ant-form-item-control-wrapper,
+  &.ant-form-inline .ant-form-item-label {
+    padding: 0!important
+  }
+
+  .ant-form-item {
+    margin-bottom: 24px;
+    margin-right: 0;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex
+  }
+  .ant-form-item>.ant-form-item-label {
+    width: auto;
+    line-height: 32px;
+    padding-right: 8px
+  }
+
+  .ant-form-item .ant-form-item-control {
+    line-height: 32px
+  }
+
+  .ant-form-item-control-wrapper {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+  }
+}
+

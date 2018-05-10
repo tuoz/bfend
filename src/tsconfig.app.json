@@ -4,7 +4,15 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": [],
+    "paths": {
+      "bfend": [
+        "../lib/index"
+      ],
+      "bfend/*": [
+        "../lib/*"
+      ]
+    }
   },
   "exclude": [
     "test.ts",

@@ -1,0 +1,167 @@
+@import "../../../../lib/src/styles/theme";
+
+.group {
+  margin-bottom: 20px;
+}
+
+.group__title {
+  font-size: 14px;
+  font-weight: normal;
+  padding: 20px 0 10px 10px;
+  color: lighten(@layout-aside-foreground, 20%);
+  cursor: default;
+  user-select: none;
+}
+
+.menu, .menu__item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: @layout-aside-foreground;
+  user-select: none;
+}
+
+.menu__item {
+  position: relative;
+
+  // 子菜单
+  &--has-children {
+    > .menu__title {
+      &:after {
+        content: "\E61D";
+        font-family: anticon !important;
+        font-style: normal;
+        vertical-align: baseline;
+        text-align: center;
+        text-transform: none;
+        text-rendering: auto;
+        position: absolute;
+        right: 16px;
+        top: 9.5px;
+        display: inline-block;
+        font-size: 12px;
+        transform: scale(.66666667) rotate(0);
+        transition: transform, color .3s cubic-bezier(.645, .045, .355, 1), ease-in-out;
+        zoom: 1;
+      }
+    }
+
+    > .menu {
+      display: none;
+      .menu__title {
+        padding-left: 38px;
+      }
+    }
+  }
+
+  // 展开
+  &--explosed {
+    .exposed-line();
+
+    background: darken(@layout-aside-background, 2%);
+
+    .menu__item--has-children:after {
+      transform: scale(.66666667) rotate(180deg);
+    }
+
+    > .menu {
+      display: block;
+
+      > .menu__item {
+        background: darken(@layout-aside-background, 2%);
+      }
+    }
+  }
+}
+
+.exposed-line() {
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: @primary-color;
+  }
+}
+
+.menu__title {
+  line-height: 20px;
+  color: @layout-aside-foreground;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  position: relative;
+
+  > a {
+    color: @layout-aside-foreground;
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &:hover {
+    color: @layout-aside-highlight;
+    background: @layout-aside-highlight-background;
+
+    > a {
+      color: @layout-aside-highlight;
+    }
+
+    &:after {
+      color: @layout-aside-highlight;
+    }
+  }
+}
+
+.menu__text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 8px 16px;
+}
+
+.menu__icon {
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+}
+
+.menu__icon + .menu__text {
+  padding-left: 40px;
+}
+
+:host .menu__title ::ng-deep .ant-badge {
+  position: absolute;
+  right: 12px;
+  top: 9px;
+  transform: scale(0.7)
+}
+
+.menu__item--active {
+  &.menu__item--leaf > .menu__title {
+    color: @layout-aside-highlight;
+    background: @layout-aside-highlight-background;
+
+    > a {
+      color: @layout-aside-highlight;
+    }
+
+    &:after {
+      color: @layout-aside-highlight;
+    }
+  }
+
+  &.menu__item--has-children > .menu__title {
+    .exposed-line();
+  }
+}
+
+.menu__item--hidden {
+  display: none;
+}
