@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BfAppService } from 'bfend';
 import { BfChangePasswordComponent } from 'bfend/src/components/change-password.component';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { takeUntil } from 'rxjs/operators';
 import { MeApi } from '../core/api/me.api';
 
 @Component({
@@ -34,7 +33,12 @@ import { MeApi } from '../core/api/me.api';
 })
 
 export class LayoutComponent implements OnInit {
-  constructor(public app: BfAppService, private nzModal: NzModalService, private nzMessage: NzMessageService, private meApi: MeApi) { }
+  constructor(
+    public app: BfAppService,
+    private nzModal: NzModalService,
+    private nzMessage: NzMessageService,
+    private meApi: MeApi
+  ) { }
 
   ngOnInit() { }
 
@@ -47,12 +51,11 @@ export class LayoutComponent implements OnInit {
       nzTitle: '修改密码',
       nzContent: BfChangePasswordComponent,
       nzMaskClosable: false,
-      nzClosable: false,
-      nzOnOk: () => new Promise((resolve, reject) => {
+      nzOnOk: () => new Promise(resolve => {
         const value = modal.getContentComponent().getValue();
 
         if (value == null) {
-          reject(false);
+          resolve(false);
           return;
         }
 
@@ -60,21 +63,8 @@ export class LayoutComponent implements OnInit {
           .subscribe(() => {
             this.nzMessage.success('修改成功');
             resolve();
-          }, () => reject(false))
+          }, () => resolve(false))
       })
     });
-
-    // const sub = modal.afterClose.pipe(takeUntil(res => res === 'ok')).subscribe(res => {
-    //   if (res === 'ok') {
-    //     setTimeout(() => sub.unsubscribe());
-    //   }
-    // });
-
-    // const modal = this.nzModal.create({
-    //   nzTitle: 'Modal Title',
-    //   nzContent: 'string, will close after 1 sec',
-    //   nzClosable: false,
-    //   nzOnOk: () => new Promise((resolve) => window.setTimeout(resolve, 1000))
-    // });
   }
 }

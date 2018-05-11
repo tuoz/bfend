@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
 import { confirmationValidator, touchForm } from '../utils/form';
 
 @Component({
@@ -41,9 +40,7 @@ import { confirmationValidator, touchForm } from '../utils/form';
   `
 })
 
-export class BfChangePasswordComponent implements OnInit, OnDestroy {
-
-  private sub = new Subscription();
+export class BfChangePasswordComponent implements OnInit {
 
   form: FormGroup;
 
@@ -55,10 +52,6 @@ export class BfChangePasswordComponent implements OnInit, OnDestroy {
       'new_password': [null, [Validators.required, Validators.minLength(6)]],
       'new_password_confirmation': [null, [Validators.required, confirmationValidator('new_password')]]
     });
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 
   getValue() {
