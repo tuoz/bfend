@@ -7,7 +7,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
 import { BfAppService } from './src/app.service';
 import { BfHttpService } from './src/http/http.service';
-import { BFEND_OPTIONS, getOptions, BfendOptions, setOptions } from './src/options.type';
+import { BFEND_OPTIONS, BfendOptions } from './src/options.type';
 import { BfSettingsService } from './src/settings.service';
 import { BfMenuService } from './src/menu.service';
 import { BfACLService } from './src/auth/acl.service';
