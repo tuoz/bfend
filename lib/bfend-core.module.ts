@@ -55,12 +55,7 @@ export class BfendCoreModule {
     throwIfAlreadyLoaded(parentModule, 'BfendCoreModule');
   }
 
-  static forRoot(options: Partial<BfendOptions>): ModuleWithProviders {
-
-    setOptions({
-      ...getOptions(),
-      ...options
-    });
+  static forRoot(options: BfendOptions): ModuleWithProviders {
 
     return {
       ngModule: BfendCoreModule,
@@ -77,7 +72,7 @@ export class BfendCoreModule {
         BfAuthGuard,
         BfUploadService,
         {provide: NZ_I18N, useValue: zh_CN},
-        {provide: BFEND_OPTIONS, useValue: getOptions()},
+        {provide: BFEND_OPTIONS, useValue: options},
         {
           provide: APP_INITIALIZER,
           useFactory: startupServiceFactory,

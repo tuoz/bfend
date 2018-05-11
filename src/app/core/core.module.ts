@@ -7,7 +7,9 @@ import { MeApi } from './api/me.api';
   imports: [
     BfendCoreModule.forRoot({
       app_key: env.app_key,
-      api_base_uri: env.api_base_uri
+      api_base_uri: env.api_base_uri,
+      url_app: '/app',
+      url_login: '/auth/login'
     })
   ],
   providers: [
