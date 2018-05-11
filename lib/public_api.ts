@@ -9,7 +9,7 @@ export * from './src/components/layout/footer.component';
 export * from './src/components/layout/page.component';
 export * from './src/components/modal-proxy.component';
 export * from './src/components/state-text.component';
-export * from './src/components/layout/change-password.component';
+export * from './src/components/change-password.component';
 export * from './src/components/acl.directive';
 export * from './src/components/confirmation-validator.directive';
 export * from './src/components/datetime-validator.directive';
@@ -30,7 +30,6 @@ export * from './src/http/upload.service';
 export * from './src/http/http-managed.interceptor';
 export * from './src/auth/auth.interceptor';
 export * from './src/http/http.interceptor';
-export * from './src/api/me.api';
 export * from './src/options.type';
 
 export * from './src/utils/form';

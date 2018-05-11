@@ -13,7 +13,7 @@ import { BfFooterComponent } from './src/components/layout/footer.component';
 import { BfPageComponent } from './src/components/layout/page.component';
 import { BfModalProxyComponent } from './src/components/modal-proxy.component';
 import { BfStateTextComponent } from './src/components/state-text.component';
-import { BfChangePasswordComponent } from './src/components/layout/change-password.component';
+import { BfChangePasswordComponent } from './src/components/change-password.component';
 import { BfACLDirective } from './src/components/acl.directive';
 import { BfConfirmationValidatorDirective } from './src/components/confirmation-validator.directive';
 import { BfDatetimeValidatorDirective } from './src/components/datetime-validator.directive';

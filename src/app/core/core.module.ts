@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { throwIfAlreadyLoaded, BfendCoreModule } from 'bfend'
 import { environment as env } from '../../environments/environment'
+import { MeApi } from './api/me.api';
 
 @NgModule({
   imports: [
@@ -9,7 +10,9 @@ import { environment as env } from '../../environments/environment'
       api_base_uri: env.api_base_uri
     })
   ],
-  providers: []
+  providers: [
+    MeApi
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf()parentModule: CoreModule) {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { BfHttpService } from '../http/http.service';
+import { BfHttpService } from 'bfend';
 
 @Injectable()
 export class MeApi {
@@ -15,5 +15,4 @@ export class MeApi {
       new_password: newPassword
     });
   }
-
 }
