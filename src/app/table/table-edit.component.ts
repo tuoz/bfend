@@ -1,32 +1,47 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { NzModalRef, NzModalComponent } from 'ng-zorro-antd';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { touchForm } from 'bfend';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   template: `
-    <p>Table Edit</p>
+    <form nz-form [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input formControlName="name" id="name">
+          <nz-form-explain *ngIf="form.get('name').dirty && form.get('name').errors">请输入正确的名称</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
   `
 })
 export class TableEditComponent implements OnInit {
+
   @Input() id: number;
 
-  private modal: NzModalComponent;
+  form: FormGroup;
 
-  constructor(private modalRef: NzModalRef) {}
+  constructor(private fb: FormBuilder, private nzMessage: NzMessageService) {}
 
   ngOnInit() {
-    console.log('id:', this.id);
-    this.modal = this.modalRef.getInstance();
-    (this.modal.nzOnOk as EventEmitter<any>).subscribe(this.submit.bind(this));
+    this.form = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]]
+    });
   }
 
   submit() {
-    this.modal.nzOkLoading = true;
-    if (this.id++ < 125) {
-      this.modal.nzOkLoading = false;
-    } else {
+    return new Promise(resolve => {
+      if (!this.form.valid) {
+        touchForm(this.form);
+        resolve(false);
+        return;
+      }
+
       setTimeout(() => {
-        this.modal.destroy();
+        this.nzMessage.success(this.id ? '修改成功' : '添加成功');
+        resolve();
       }, 1000);
-    }
+    });
   }
 }

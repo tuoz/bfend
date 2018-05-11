@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { TableEditComponent } from 'app/table/table-edit.component';
 
 @Component({
@@ -82,16 +82,17 @@ import { TableEditComponent } from 'app/table/table-edit.component';
           <span>新建</span>
         </button>
 
-        <nz-table #nzTable
-                  [nzData]="data"
-                  [nzFrontPagination]="false"
-                  [nzTotal]="page.total"
-                  [(nzPageIndex)]="page.index"
-                  [(nzPageSize)]="page.size"
-                  (nzPageIndexChange)="onPageIndexChange($event)"
-                  [nzSize]="'middle'"
-                  [nzLoading]="loading"
-                  [nzLoadingDelay]="1000">
+        <nz-table
+          #nzTable
+          [nzData]="data"
+          [nzFrontPagination]="false"
+          [nzTotal]="page.total"
+          [(nzPageIndex)]="page.index"
+          [(nzPageSize)]="page.size"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          [nzSize]="'middle'"
+          [nzLoading]="loading"
+          [nzLoadingDelay]="1000">
           <thead>
           <tr>
             <th>Name</th>
@@ -134,7 +135,7 @@ export class TableComponent implements OnInit {
     size: 20
   };
 
-  constructor(private nzModal: NzModalService ) {}
+  constructor(private nzModal: NzModalService) {}
 
   ngOnInit() {
     this.data = [
@@ -154,7 +155,8 @@ export class TableComponent implements OnInit {
       nzMaskClosable: false,
       nzComponentParams: {
         id
-      }
+      },
+      nzOnOk: () => modal.getContentComponent().submit()
     });
   }
 
