@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { BfSettingsService } from '../../settings.service';
 import { BfAppService } from '../../app.service';
-import { BfChangePasswordComponent } from './change-password.component';
+import { BfChangePasswordComponent } from '../change-password.component';
 import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
@@ -18,50 +18,19 @@ import { NzModalService } from 'ng-zorro-antd';
           <i class="nav__menu-icon anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
         </li>
       </ul>
-      <ul class="nav__menu">
-        <li class="nav__menu-item">
-          <nz-tooltip nzPlacement="bottom" nzTitle="修改密码">
-            <span nz-tooltip (click)="changePassword()" class="nav__menu-link pr-sm pl-sm">
-              <i class="nav__menu-icon anticon anticon-user"></i>
-              {{app.user.name}}
-            </span>
-          </nz-tooltip>
-        </li>
-        <li class="nav__menu-item">
-          <nz-tooltip nzTitle="退出登录">
-            <a nz-tooltip (click)="logout()" class="nav__menu-link">
-              <i class="nav__menu-icon anticon anticon-logout"></i>
-            </a>
-          </nz-tooltip>
-        </li>
-      </ul>
+
+      <ng-template *ngIf="bfNav" [ngTemplateOutlet]="bfNav"></ng-template>
     </div>
   `,
   styleUrls: ['./header.component.less']
 })
 export class BfHeaderComponent {
-  constructor(private nzModal: NzModalService, public settings: BfSettingsService, public app: BfAppService) {
-  }
+
+  @Input() bfNav: TemplateRef<any>;
+
+  constructor(public settings: BfSettingsService) {}
 
   toggleAside() {
     this.settings.toggleCollapsed();
-  }
-
-  logout() {
-    this.app.logout();
-  }
-
-  changePassword() {
-    const modal = this.nzModal.create({
-      nzTitle: '修改密码',
-      nzContent: BfChangePasswordComponent,
-      nzMaskClosable: false
-    });
-
-    const sub = modal.afterClose.subscribe(res => {
-      if (res === 'ok') {
-        setTimeout(() => sub.unsubscribe());
-      }
-    });
   }
 }

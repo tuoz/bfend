@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { BfSettingsService } from '../../settings.service';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
     <nz-layout class="layout">
       <ng-progress [showSpinner]="false" [color]="'orange'"></ng-progress>
       <nz-header>
-        <bf-header></bf-header>
+        <bf-header [bfNav]="headerNav"></bf-header>
       </nz-header>
       <nz-layout>
         <nz-sider
@@ -34,11 +34,12 @@ import { Subscription } from 'rxjs/Subscription';
     </nz-layout>
   `,
   styleUrls: ['./layout.component.less'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BfLayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
   private sub = new Subscription();
+
+  @Input() headerNav: TemplateRef<any>;
 
   constructor(
     private ngProgress: NgProgress,
