@@ -7,11 +7,46 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/combineLatest';
 
-import { BfAppService } from 'bfend';
+import { BfAppService, BfSettingsService } from 'bfend';
 import { BfAuthService } from 'bfend';
 
 @Component({
-  templateUrl: './login.component.html',
+  template: `
+    <div class="container">
+      <div class="login">
+        <div class="logo"><img src="../../assets/img/logo-login.svg" alt="Logo"></div>
+        <p class="title">{{settings.app.name}}</p>
+        <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+                <input type="text" autofocus nz-input formControlName="username" placeholder="用户名">
+              </nz-input-group>
+              <nz-form-explain nz-form-explain *ngIf="form.get('username').dirty&&form.get('username').hasError('required')">用户名必填
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="anticon anticon-lock" nzSize="large">
+                <input type="password" nz-input formControlName="password" placeholder="密码">
+              </nz-input-group>
+              <nz-form-explain *ngIf="form.get('password').dirty&&form.get('password').hasError('required')">密码必填</nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-col [nzSpan]="12">
+              <label nz-checkbox formControlName="remember">自动登录</label>
+            </nz-col>
+          </nz-form-item>
+          <nz-form-item>
+            <button nz-button style="width:100%;" type="submit" nzType="primary" nzSize="large" [nzLoading]="submitting">登录</button>
+          </nz-form-item>
+        </form>
+      </div>
+      <bf-footer [padding]="true"></bf-footer>
+    </div>
+  `,
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -25,7 +60,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private nzMessage: NzMessageService,
-    private appService: BfAppService,
+    public app: BfAppService,
+    public settings: BfSettingsService,
     private authService: BfAuthService,
   ) {
     this.form = fb.group({

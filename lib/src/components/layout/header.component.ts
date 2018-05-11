@@ -8,7 +8,7 @@ import { NzModalService } from 'ng-zorro-antd';
   selector: 'bf-header',
   template: `
     <div class="title">
-      <img class="title__logo" src="assets/img/logo_header.png" alt="logo">
+      <img class="title__logo" src="assets/img/logo-header.svg" alt="logo">
       <h1 class="title_text">{{settings.app.title}}</h1>
     </div>
 
