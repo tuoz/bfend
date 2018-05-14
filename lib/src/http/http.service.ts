@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { filter, scan, switchMap, delay } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import 'zone.js';
 
@@ -10,7 +12,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 
 import { of } from 'rxjs/observable/of';
-import { delay } from 'rxjs/operators/delay';
 import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 
 export interface ManagedOptions {
@@ -31,17 +32,17 @@ export interface SearchCriteria {[index: string]: any;}
 export class BfHttpService {
   private loadingSubject = new Subject<boolean>();
 
-  readonly loading$ = this.loadingSubject
-    .asObservable()
-    .scan<boolean, State>(
+  readonly loading$:Observable<boolean> = this.loadingSubject.asObservable().pipe(
+    scan<boolean, State>(
       ({diff}, show) => (show ? {diff: diff + 1, show} : {diff: diff - 1, show}),
       {
         diff: 0,
         show: false
       }
-    )
-    .filter(state => state.diff === 0 || (state.diff === 1 && state.show))
-    .switchMap(state => of(state.diff === 1).pipe(delay(10)));
+    ),
+    filter(state => state.diff === 0 || (state.diff === 1 && state.show)),
+    switchMap(state => of(state.diff === 1).pipe(delay(10)))
+  )
 
   constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 

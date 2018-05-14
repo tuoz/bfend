@@ -1,6 +1,7 @@
 import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NavigationCancel, NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { combineLatest, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -16,8 +17,7 @@ import { User } from './auth/user.type';
 import { BfHttpService } from './http/http.service';
 
 /**
- * 用于应用启动时
- * 一般用来获取应用所需要的基础数据等
+ * @dynamic
  */
 @Injectable()
 export class BfAppService {
@@ -26,7 +26,7 @@ export class BfAppService {
 
   private isBusySubject = new Subject<boolean>();
 
-  public loading$ = merge(this.httpService.loading$, this.isBusySubject);
+  public loading$: Observable<boolean> = merge(this.httpService.loading$, this.isBusySubject);
 
   get user() {
     return this._user;
