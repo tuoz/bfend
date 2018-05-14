@@ -140,7 +140,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.data = [
       {name: 'hypo', age: 30, address: '重庆'},
-      {name: 'cindy', age: 29, address: '九龙坡'},
+      {name: 'opyh', age: 30, address: '庆重'},
     ];
   }
 
