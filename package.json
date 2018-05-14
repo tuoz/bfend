@@ -1,7 +1,26 @@
 {
   "name": "bfend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
+  "description": "Admin template base on ng-zorro-antd",
+  "keywords": [
+    "ant",
+    "design",
+    "angular",
+    "ui",
+    "framework",
+    "frontend",
+    "admin"
+  ],
+  "homepage": "https://github.com/hypocenter/bfend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypocenter/bfend"
+  },
+  "bugs": {
+    "url": "https://github.com/hypocenter/bfend/issues"
+  },
+  "author": "hypo hypomail@gmai.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

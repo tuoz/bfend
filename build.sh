@@ -6,6 +6,7 @@ rm -rf publish
 
 echo 'Copying lib'
 cp -r lib publish
+cp -r assets publish/assets
 
 echo 'Copying package.json'
 cp package.json publish/package.json
