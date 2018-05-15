@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BfAppService } from 'bfend';
-import { BfChangePasswordComponent } from 'bfend/src/components/change-password.component';
+import { BfChangePasswordComponent } from 'bfend';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { MeApi } from '../core/api/me.api';
 

@@ -5,22 +5,21 @@ cd ${currentDir}
 
 rm -rf publish
 rm -rf __gen_lib
-rm -rf publish-es2015
 
 cp -r lib __gen_lib
-node ./scripts/inline-template.js
 
-echo 'Compiling to es2015 via Angular compiler'
-$(npm bin)/ngc -p tsconfig-build.json -t es2015 --outDir publish-es2015/src
-
-mv publish-es2015/src publish
-
-echo 'Cleaning up temporary files'
-rm -rf __gen_lib
-
-echo 'Copying assets'
-cp -r assets publish/assets
+echo 'Compiling via Angular compiler'
+$(npm bin)/ngc -p tsconfig-build.json --outDir publish
 
 echo 'Copying package.json'
 cp package.json publish/package.json
 cp README.md publish/README.md
+
+echo 'Copying resources'
+cp lib/styles.less publish
+cp -r __gen_lib/src/styles publish/src/styles
+cp __gen_lib/src/components/layout/*.less publish/src/components/layout
+cp -r __gen_lib/src/preloader publish/src/preloader
+
+echo 'Cleaning up temporary files'
+rm -rf __gen_lib

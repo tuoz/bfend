@@ -21,6 +21,8 @@
     "url": "https://github.com/hypocenter/bfend/issues"
   },
   "author": "hypo hypomail@gmai.com",
+  "main": "./bfend.js",
+  "typings": "./bfend.d.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

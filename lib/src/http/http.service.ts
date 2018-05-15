@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { filter, scan, switchMap, delay } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import 'zone.js';
+// noinspection ES6UnusedImports
+import {} from 'zone.js';
 
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/scan';
@@ -26,13 +27,13 @@ interface State {
   show: boolean;
 }
 
-export interface SearchCriteria {[index: string]: any;}
+export interface SearchCriteria { [index: string]: any; }
 
 @Injectable()
 export class BfHttpService {
   private loadingSubject = new Subject<boolean>();
 
-  readonly loading$:Observable<boolean> = this.loadingSubject.asObservable().pipe(
+  readonly loading$: Observable<boolean> = this.loadingSubject.asObservable().pipe(
     scan<boolean, State>(
       ({diff}, show) => (show ? {diff: diff + 1, show} : {diff: diff - 1, show}),
       {
@@ -42,7 +43,7 @@ export class BfHttpService {
     ),
     filter(state => state.diff === 0 || (state.diff === 1 && state.show)),
     switchMap(state => of(state.diff === 1).pipe(delay(10)))
-  )
+  );
 
   constructor(private httpClient: HttpClient, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 

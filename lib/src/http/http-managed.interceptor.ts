@@ -9,7 +9,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NzMessageService } from 'ng-zorro-antd';
-import 'zone.js';
+// noinspection ES6UnusedImports
+import {} from 'zone.js';
 
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';

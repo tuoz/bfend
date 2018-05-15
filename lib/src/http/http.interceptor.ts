@@ -8,7 +8,8 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'zone.js';
+// noinspection ES6UnusedImports
+import {} from 'zone.js';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
