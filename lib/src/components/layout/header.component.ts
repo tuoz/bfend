@@ -7,22 +7,23 @@ import { NzModalService } from 'ng-zorro-antd';
 @Component({
   selector: 'bf-header',
   template: `
-    <div class="title">
-      <img class="title__logo" src="assets/img/logo-header.svg" alt="logo">
-      <h1 class="title_text">{{settings.app.title}}</h1>
-    </div>
+    <div class="bf-header">
+      <div class="bf-header-title">
+        <img class="bf-header-title__logo" src="assets/img/logo-header.svg" alt="logo">
+        <h1 class="bf-header-title_text">{{settings.app.title}}</h1>
+      </div>
 
-    <div class="nav">
-      <ul class="nav__menu">
-        <li class="nav__menu-item" (click)="toggleAside()">
-          <i class="nav__menu-icon anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
-        </li>
-      </ul>
+      <div class="bf-nav">
+        <ul class="bf-nav__menu">
+          <li class="bf-nav__menu-item" (click)="toggleAside()">
+            <i class="bf-nav__menu-icon anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
+          </li>
+        </ul>
 
-      <ng-template *ngIf="bfNav" [ngTemplateOutlet]="bfNav"></ng-template>
+        <ng-template *ngIf="bfNav" [ngTemplateOutlet]="bfNav"></ng-template>
+      </div>
     </div>
-  `,
-  styleUrls: ['./header.component.less']
+  `
 })
 export class BfHeaderComponent {
 

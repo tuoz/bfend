@@ -3,9 +3,8 @@ import { BfSettingsService } from '../../settings.service';
 
 @Component({
   selector: 'bf-footer',
-  styleUrls: ['./footer.component.less'],
   template: `
-    <p class="footer">
+    <p class="bf-footer" [ngClass]="{'bf-footer--padding': padding}">
       &copy; {{ settings.app.year }} {{ settings.app.name }} 版权所有
       <br> {{ settings.app.description }}
     </p>

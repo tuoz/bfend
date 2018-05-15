@@ -1,35 +1,15 @@
 @import "../../styles/theme";
 
-.layout {
+.bf-layout {
   height: 100vh;
   overflow: hidden;
-}
 
-:host ::ng-deep {
   .ant-layout-header {
     padding: 0;
   }
 }
 
-.aside {
-  display: block;
-  border-right: 1px solid @layout-split-border-color;
-
-  ::ng-deep .ant-layout-sider-children {
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: ~"calc(100vh - @{layout-header-height})";
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-}
-
-.aside--collapsed {
-  margin-left: -200px;
-}
-
-.primary {
+.bf-primary {
   overflow-x: hidden;
   overflow-y: auto;
   height: ~"calc(100vh - @{layout-header-height})";

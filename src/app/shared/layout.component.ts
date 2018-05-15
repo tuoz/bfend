@@ -8,26 +8,26 @@ import { MeApi } from '../core/api/me.api';
   selector: 'app-layout',
   template: `
     <ng-template #headerNav>
-      <ul class="nav__menu">
-        <li class="nav__menu-item">
+      <ul class="bf-nav__menu">
+        <li class="bf-nav__menu-item">
           <nz-tooltip nzPlacement="bottom" nzTitle="修改密码">
-            <span nz-tooltip (click)="changePassword()" class="nav__menu-link pr-sm pl-sm">
-              <i class="nav__menu-icon anticon anticon-user"></i>
+            <span nz-tooltip (click)="changePassword()" class="bf-header-nav__menu-link pr-sm pl-sm">
+              <i class="bf-nav__menu-icon anticon anticon-user"></i>
               {{app.user.name}}
             </span>
           </nz-tooltip>
         </li>
 
-        <li class="nav__menu-item">
+        <li class="bf-nav__menu-item">
           <nz-tooltip nzTitle="退出登录">
-            <a nz-tooltip (click)="logout()" class="nav__menu-link">
-              <i class="nav__menu-icon anticon anticon-logout"></i>
+            <a nz-tooltip (click)="logout()" class="bf-header-nav__menu-link">
+              <i class="bf-nav__menu-icon anticon anticon-logout"></i>
             </a>
           </nz-tooltip>
         </li>
       </ul>
     </ng-template>
-    
+
     <bf-layout [headerNav]="headerNav"></bf-layout>
   `
 })

@@ -7,12 +7,12 @@ import { Component, Input, TemplateRef } from '@angular/core';
       <ng-template [ngTemplateOutlet]="description"></ng-template>
     </ng-template>
 
-    <div class="title">
-      <div class="title__breadcrumb" *ngIf="breadcrumb">
+    <div class="bf-page-title">
+      <div class="bf-page-title__breadcrumb" *ngIf="breadcrumb">
         <ng-container *ngTemplateOutlet="breadcrumb"></ng-container>
       </div>
-      <div class="title__text">{{caption}}</div>
-      <div class="title__description" *ngIf="description">
+      <div class="bf-page-title__text">{{caption}}</div>
+      <div class="bf-page-title__description" *ngIf="description">
         <ng-container *ngIf="isDescriptionString; else descTemplate">
           {{description}}
         </ng-container>
@@ -21,11 +21,10 @@ import { Component, Input, TemplateRef } from '@angular/core';
       <ng-container *ngTemplateOutlet="extra"></ng-container>
     </div>
 
-    <div class="content">
+    <div class="bf-page-content">
       <ng-content></ng-content>
     </div>
-  `,
-  styleUrls: ['./page.component.less']
+  `
 })
 export class BfPageComponent {
   @Input() caption: string;

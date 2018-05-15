@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'bf-layout',
   template: `
-    <nz-layout class="layout">
+    <nz-layout class="bf-layout">
       <ng-progress [showSpinner]="false" [color]="'orange'"></ng-progress>
       <nz-header>
         <bf-header [bfNav]="headerNav"></bf-header>
@@ -18,11 +18,11 @@ import { Subscription } from 'rxjs/Subscription';
         <nz-sider
           [nzWidth]="settings.layout.aside_width"
           [nzCollapsible]="false"
-          class="aside"
-          [ngClass]="{'aside--collapsed': settings.layout.collapsed}">
+          class="bf-aside"
+          [ngClass]="{'bf-aside--collapsed': settings.layout.collapsed}">
           <bf-aside></bf-aside>
         </nz-sider>
-        <nz-layout class="primary">
+        <nz-layout class="bf-primary">
           <nz-content>
             <router-outlet></router-outlet>
           </nz-content>
@@ -32,8 +32,7 @@ import { Subscription } from 'rxjs/Subscription';
         </nz-layout>
       </nz-layout>
     </nz-layout>
-  `,
-  styleUrls: ['./layout.component.less'],
+  `
 })
 export class BfLayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
