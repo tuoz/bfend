@@ -7,7 +7,7 @@ import { MeApi } from '../core/api/me.api';
 @Component({
   selector: 'app-layout',
   template: `
-    <ng-template #headerNav>
+    <ng-template #bfNav>
       <ul class="bf-nav__menu">
         <li class="bf-nav__menu-item">
           <nz-tooltip nzPlacement="bottom" nzTitle="修改密码">
@@ -28,7 +28,7 @@ import { MeApi } from '../core/api/me.api';
       </ul>
     </ng-template>
 
-    <bf-layout [headerNav]="headerNav"></bf-layout>
+    <bf-layout [bfNav]="bfNav"></bf-layout>
   `
 })
 

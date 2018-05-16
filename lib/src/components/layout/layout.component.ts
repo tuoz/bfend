@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'bf-layout',
   template: `
     <nz-layout class="bf-layout">
-      <ng-progress [showSpinner]="false" [color]="'orange'"></ng-progress>
+      <ng-progress [showSpinner]="false" [color]="bfProgressColor"></ng-progress>
       <nz-header>
-        <bf-header [bfNav]="headerNav"></bf-header>
+        <bf-header [bfNav]="bfNav" [bfLogo]="bfLogo"></bf-header>
       </nz-header>
       <nz-layout>
         <nz-sider
@@ -38,7 +38,9 @@ export class BfLayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
   private sub = new Subscription();
 
-  @Input() headerNav: TemplateRef<any>;
+  @Input() bfNav: TemplateRef<any>;
+  @Input() bfLogo: string = 'assets/img/logo-header.svg';
+  @Input() bfProgressColor: string = '#faad14'
 
   constructor(
     private ngProgress: NgProgress,

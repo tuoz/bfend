@@ -9,7 +9,7 @@ import { NzModalService } from 'ng-zorro-antd';
   template: `
     <div class="bf-header">
       <div class="bf-header-title">
-        <img class="bf-header-title__logo" src="assets/img/logo-header.svg" alt="logo">
+        <img class="bf-header-title__logo" [src]="bfLogo" alt="logo">
         <h1 class="bf-header-title_text">{{settings.app.title}}</h1>
       </div>
 
@@ -28,6 +28,7 @@ import { NzModalService } from 'ng-zorro-antd';
 export class BfHeaderComponent {
 
   @Input() bfNav: TemplateRef<any>;
+  @Input() bfLogo: string;
 
   constructor(public settings: BfSettingsService) {}
 
