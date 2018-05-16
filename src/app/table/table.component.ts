@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { TableEditComponent } from 'app/table/table-edit.component';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   template: `
@@ -9,10 +9,10 @@ import { TableEditComponent } from 'app/table/table-edit.component';
 
       <nz-card>
         <form class="search-form" nz-form [nzLayout]="'inline'">
-          <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+          <nz-row nzType="flex" [nzGutter]="16">
             <nz-col [nzMd]="8" [nzSm]="24">
               <nz-form-item>
-                <nz-form-label nzFor="no">规则编号</nz-form-label>
+                <nz-form-label nzFor="no" style="width:95px;">规则编号</nz-form-label>
                 <nz-form-control>
                   <input nz-input name="no" placeholder="请输入" id="no">
                 </nz-form-control>
@@ -20,7 +20,7 @@ import { TableEditComponent } from 'app/table/table-edit.component';
             </nz-col>
             <nz-col [nzMd]="8" [nzSm]="24">
               <nz-form-item>
-                <nz-form-label nzFor="status">使用状态</nz-form-label>
+                <nz-form-label nzFor="status" style="width:95px;">使用状态</nz-form-label>
                 <nz-form-control>
                   <nz-select name="status" id="status" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true">
                     <nz-option [nzLabel]="'成功'" [nzValue]="1"></nz-option>
@@ -31,7 +31,7 @@ import { TableEditComponent } from 'app/table/table-edit.component';
             </nz-col>
             <nz-col [nzMd]="8" [nzSm]="24" *ngIf="expandForm">
               <nz-form-item>
-                <nz-form-label nzFor="callNo">调用次数</nz-form-label>
+                <nz-form-label nzFor="callNo" style="width:95px;">调用次数</nz-form-label>
                 <nz-form-control>
                   <input nz-input id="callNo">
                 </nz-form-control>
@@ -39,14 +39,14 @@ import { TableEditComponent } from 'app/table/table-edit.component';
             </nz-col>
             <nz-col [nzMd]="8" [nzSm]="24" *ngIf="expandForm">
               <nz-form-item>
-                <nz-form-label nzFor="updatedAt">更新日期</nz-form-label>
+                <nz-form-label nzFor="updatedAt" style="width:95px;">更新日期</nz-form-label>
                 <nz-form-control>
                 </nz-form-control>
               </nz-form-item>
             </nz-col>
             <nz-col [nzMd]="8" [nzSm]="24" *ngIf="expandForm">
               <nz-form-item>
-                <nz-form-label nzFor="status2">使用状态</nz-form-label>
+                <nz-form-label nzFor="status2" style="width:95px;">使用状态</nz-form-label>
                 <nz-form-control>
                   <nz-select [nzPlaceHolder]="'请选择'" nzId="status2" [nzShowSearch]="true">
                     <nz-option [nzLabel]="'成功'" [nzValue]="1"></nz-option>
@@ -57,7 +57,7 @@ import { TableEditComponent } from 'app/table/table-edit.component';
             </nz-col>
             <nz-col [nzMd]="8" [nzSm]="24" *ngIf="expandForm">
               <nz-form-item>
-                <nz-form-label nzFor="status3">使用状态</nz-form-label>
+                <nz-form-label nzFor="status3" style="width:95px;">使用状态</nz-form-label>
                 <nz-form-control>
                   <nz-select [nzPlaceHolder]="'请选择'" nzId="status3" [nzShowSearch]="true">
                     <nz-option [nzLabel]="'成功'" [nzValue]="1"></nz-option>
