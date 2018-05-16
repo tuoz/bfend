@@ -145,7 +145,7 @@ export class TableComponent implements OnInit {
   }
 
   load() {
-
+    console.log('load data')
   }
 
   edit(id?) {
@@ -153,10 +153,13 @@ export class TableComponent implements OnInit {
       nzTitle: id ? '编辑' : '添加',
       nzContent: TableEditComponent,
       nzMaskClosable: false,
-      nzComponentParams: {
-        id
-      },
-      nzOnOk: () => modal.getContentComponent().submit()
+      nzComponentParams: {id},
+      nzOnOk: () => modal.getContentComponent().submit().then(res => {
+        if (res) {
+          this.load();
+        }
+        return res;
+      })
     });
   }
 
