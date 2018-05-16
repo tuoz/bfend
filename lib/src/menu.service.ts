@@ -101,19 +101,19 @@ export class BfMenuService {
     this.aclService.rules$.subscribe(this.refreshSubject);
   }
 
-  private walk(menus, callback: (item: Menu, parentMenum: Menu, depth?: number) => void) {
-    const inFn = (list: Menu[], parentMenu: Menu, depth: number) => {
+  private walk(menus, callback: (item: Menu, parentMenu: Menu, depth?: number) => void) {
+    const _walk = (list: Menu[], parentMenu: Menu, depth: number) => {
       for (const item of list) {
         callback(item, parentMenu, depth);
         if (item.children && item.children.length > 0) {
-          inFn(item.children, item, depth + 1);
+          _walk(item.children, item, depth + 1);
         } else {
           item.children = [];
         }
       }
     };
 
-    inFn(menus, null, 0);
+    _walk(menus, null, 0);
   }
 
   private prune(menus: Menu[]): Menu[] {
@@ -181,7 +181,7 @@ export class BfMenuService {
       if (!item.link) {
         return;
       }
-      if (!findItem && item.link.includes(url)) {
+      if (!findItem && new RegExp(`^${url}\\b`).test(item.link)) {
         findItem = item;
       }
     });
