@@ -26,10 +26,12 @@ export * from './src/auth/token.service';
 export * from './src/title.service';
 export * from './src/auth/auth.service';
 export * from './src/auth/auth-guard.service';
+export * from './src/auth/user.type';
 export * from './src/http/upload.service';
 export * from './src/http/http-managed.interceptor';
 export * from './src/auth/auth.interceptor';
 export * from './src/http/http.interceptor';
+export * from './src/http/pagination.type';
 export * from './src/options.type';
 
 export * from './src/utils/form';
