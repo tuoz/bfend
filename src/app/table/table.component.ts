@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
+import { BfKeepAliveService } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
+import { TableApi } from './table.api';
 
 @Component({
   template: `
@@ -107,10 +110,14 @@ import { NzModalService } from 'ng-zorro-antd';
             <td>{{data.age}}</td>
             <td>{{data.address}}</td>
             <td>
-          <span [acl]="'table.edit'">
-            <a (click)="edit(123)">编辑</a>
-            <nz-divider nzType="vertical"></nz-divider>
-          </span>
+              <span [acl]="'table.index'">
+                <a [routerLink]="'./' + data.id">详情</a>
+                <nz-divider nzType="vertical"></nz-divider>
+              </span>
+              <span [acl]="'table.edit'">
+                <a (click)="edit(123)">编辑</a>
+                <nz-divider nzType="vertical"></nz-divider>
+              </span>
               <nz-popconfirm [nzTitle]="'确定要删除吗？'">
                 <a class="text-error" nz-popconfirm>删除</a>
               </nz-popconfirm>
@@ -123,7 +130,7 @@ import { NzModalService } from 'ng-zorro-antd';
   `
 })
 export class TableComponent implements OnInit {
-  data: any;
+  data: any = [];
 
   loading = false;
 
@@ -131,21 +138,22 @@ export class TableComponent implements OnInit {
 
   page = {
     index: 1,
-    total: 100,
+    total: 0,
     size: 20
   };
 
-  constructor(private nzModal: NzModalService) {}
+  constructor(private route: ActivatedRoute, private keepAlive: BfKeepAliveService, private nzModal: NzModalService, private api: TableApi) {}
 
   ngOnInit() {
-    this.data = [
-      {name: 'hypo', age: 30, address: '重庆'},
-      {name: 'opyh', age: 30, address: '庆重'},
-    ];
+    this.load();
   }
 
   load() {
-    console.log('load data')
+    this.api.get({page: this.page.index, page_size: this.page.size})
+      .subscribe(res => {
+        this.data = res.data;
+        this.page.total = res.meta.total;
+      });
   }
 
   edit(id?) {
@@ -164,6 +172,8 @@ export class TableComponent implements OnInit {
   }
 
   onPageIndexChange(index) {
+    this.keepAlive.mark();
+    this.page.index = index;
     this.load();
   }
 }
