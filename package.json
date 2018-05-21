@@ -1,6 +1,6 @@
 {
   "name": "bfend",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Admin template base on ng-zorro-antd",
   "keywords": [
@@ -64,7 +64,7 @@
     "@angular/language-service": "^5.2.11",
     "@types/jasmine": "^2.8.7",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "^6.0.110",
+    "@types/node": "^6.0.111",
     "codelyzer": "^4.3.0",
     "dotenv": "^5.0.1",
     "jasmine-core": "~2.8.0",
