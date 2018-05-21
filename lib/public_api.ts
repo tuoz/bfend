@@ -34,5 +34,8 @@ export * from './src/http/http.interceptor';
 export * from './src/http/pagination.type';
 export * from './src/options.type';
 
+export * from './src/keep-alive/keep-alive.service';
+export * from './src/keep-alive/keep-alive-reuse-strategy';
+
 export * from './src/utils/form';
 export * from './src/module-import-guard';
