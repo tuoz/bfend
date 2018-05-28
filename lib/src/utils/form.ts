@@ -32,7 +32,7 @@ export function datetimeValidator(): ValidatorFn {
   };
 }
 
-const phoneRexp = /1\d{10}/;
+const phoneRexp = /^1\d{10}$/;
 
 export function phoneValidator(): ValidatorFn {
   return (c: AbstractControl) => {
