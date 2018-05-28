@@ -1,6 +1,6 @@
 {
   "name": "bfend",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "Admin template base on ng-zorro-antd",
   "keywords": [
@@ -48,12 +48,12 @@
     "@angular/router": "^5.2.11",
     "@auth0/angular-jwt": "^1.2.0",
     "angular-web-storage": "^2.0.0",
-    "core-js": "^2.5.6",
+    "core-js": "^2.5.7",
     "glob": "^7.1.2",
     "moment": "^2.22.1",
-    "ng-zorro-antd": "^0.7.0",
+    "ng-zorro-antd": "^0.7.1",
     "ngx-progressbar": "^2.1.1",
-    "rxjs": "^5.5.10",
+    "rxjs": "^5.5.11",
     "simple-line-icons": "^2.4.1",
     "ya-mock-server": "^0.2.0",
     "zone.js": "^0.8.26"
