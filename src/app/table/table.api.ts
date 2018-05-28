@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BfHttpService, PaginationParameter, PaginatedResult } from 'bfend';
+import { of } from 'rxjs/observable/of';
+import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class TableApi {
@@ -13,5 +15,9 @@ export class TableApi {
 
   profile(id) {
     return this.client.get<any>(this.http.url(`/user/${id}`));
+  }
+
+  update(id, data) {
+    return of(true).pipe(delay(1000));
   }
 }

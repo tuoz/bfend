@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { touchForm } from 'bfend';
 import { NzMessageService } from 'ng-zorro-antd';
+import { TableApi } from './table.api';
 
 @Component({
   template: `
@@ -22,7 +23,7 @@ export class TableEditComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private nzMessage: NzMessageService) {}
+  constructor(private fb: FormBuilder, private nzMessage: NzMessageService, private api: TableApi) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -38,10 +39,13 @@ export class TableEditComponent implements OnInit {
         return;
       }
 
-      setTimeout(() => {
-        this.nzMessage.success(this.id ? '修改成功' : '添加成功');
-        resolve();
-      }, 1000);
+      this.api.update(this.id, []).subscribe(
+        () => {
+          this.nzMessage.success(this.id ? '修改成功' : '添加成功');
+          resolve(true);
+        },
+        () => resolve(false)
+      )
     });
   }
 }
