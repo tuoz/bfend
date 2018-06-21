@@ -53,19 +53,18 @@ export class BfHttpService {
 
   search(criteria: { [index: string]: any }) {
     const searches: string[] = [];
-    if (criteria) {
-      for (const k of Object.keys(criteria)) {
-        if (criteria[k] != null) {
-          let value = criteria[k];
+    for (const k of Object.keys(criteria)) {
+      if (criteria[k] != null) {
+        const key = k.toString().replace(/[:;]/g, '');
+        let value = criteria[k];
 
-          if (Array.isArray(value)) {
-            value = value.map(v => v.toString().replace(/[,:;]/g, '')).join(',');
-          } else {
-            value = value.toString().replace(/[,:;]/g, '');
-          }
-
-          searches.push(`${k}:${value}`);
+        if (Array.isArray(value)) {
+          value = value.map(v => v.toString().replace(/[,;]/g, '')).join(',');
+        } else {
+          value = value.toString().replace(/[;]/g, '');
         }
+
+        searches.push(`${key}:${value}`);
       }
     }
 
