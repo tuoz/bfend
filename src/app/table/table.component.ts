@@ -4,6 +4,7 @@ import { TableEditComponent } from 'app/table/table-edit.component';
 import { BfKeepAliveService } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
 import { TableApi } from './table.api';
+import { finalize } from 'rxjs/operators/finalize';
 
 @Component({
   template: `
@@ -142,14 +143,21 @@ export class TableComponent implements OnInit {
     size: 20
   };
 
-  constructor(private route: ActivatedRoute, private keepAlive: BfKeepAliveService, private nzModal: NzModalService, private api: TableApi) {}
+  constructor(
+    private route: ActivatedRoute,
+    private keepAlive: BfKeepAliveService,
+    private nzModal: NzModalService,
+    private api: TableApi
+  ) {}
 
   ngOnInit() {
     this.load();
   }
 
   load() {
+    this.loading = true;
     this.api.get({page: this.page.index, page_size: this.page.size})
+      .pipe(finalize(() => this.loading = false))
       .subscribe(res => {
         this.data = res.data;
         this.page.total = res.meta.total;
