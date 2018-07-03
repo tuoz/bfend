@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-export const KEEP_ALIVE_ID = '_keep';
+import { BFEND_OPTIONS, BfendOptions } from '../options.type';
 
 @Injectable()
 export class BfKeepAliveService {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, @Inject(BFEND_OPTIONS) private options: BfendOptions) {}
 
   mark(): Promise<any> {
     const url = this.router.parseUrl(this.router.url);
 
-    if (typeof url.queryParams[KEEP_ALIVE_ID] === 'undefined') {
-      url.queryParams[KEEP_ALIVE_ID] = '';
+    if (typeof url.queryParams[this.options.keep_alive_id] === 'undefined') {
+      url.queryParams[this.options.keep_alive_id] = '';
       return this.router.navigateByUrl(url, {replaceUrl: true});
     }
 

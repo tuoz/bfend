@@ -60,6 +60,8 @@ export class BfendCoreModule {
 
   static forRoot(options: BfendOptions): ModuleWithProviders {
 
+    options.keep_alive_id = options.keep_alive_id || 'keep';
+
     return {
       ngModule: BfendCoreModule,
       providers: [
