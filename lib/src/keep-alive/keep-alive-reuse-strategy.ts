@@ -15,6 +15,9 @@ export class BfKeepAliveReuseStrategy implements RouteReuseStrategy {
   }
 
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+    if (handle == null) {
+      return
+    }
     this.cacheRouters[getRouteUrl(route)] = {
       snapshot: route,
       handle: handle
@@ -36,49 +39,20 @@ export class BfKeepAliveReuseStrategy implements RouteReuseStrategy {
   }
 
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    if (future.routeConfig === curr.routeConfig) {
-      if (curr.routeConfig && curr.routeConfig.data && curr.routeConfig.data['keep_alive']) {
-        // Angular 对 shouldReuseRoute 的调用参数循序有问题，多次调用顺序不一致
-        // 见 create_router_state.ts:26, create_router_state.ts:68
-        // 故，出次下策
-        // 据观察，第一次调用参数是正确的(curr 理解为当前状态，future 理解为前一个状态)
-        if (future['__current__']) {
-          delete future['__current__'];
-          const sw = curr;
-          curr = future;
-          future = sw;
-        } else {
-          curr['__current__'] = true;
-        }
-
-        if (typeof curr.queryParams[KEEP_ALIVE_ID] === 'undefined') {
-          delete this.cacheRouters[getRouteUrl(curr)];
-          delete curr['__current__'];
-          delete future['__current__'];
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    return false;
+    return future.routeConfig === curr.routeConfig;
   }
 }
 
 
 function getRouteUrl(route: ActivatedRouteSnapshot) {
-  let p = route;
-  const url = [];
-
-  while (p) {
-    url.push(...p.url.map(f => f.toString()).reverse());
-    p = p.parent;
-  }
+  const url = route.pathFromRoot
+    .filter(r => r.url && r.url.length > 0)
+    .map(r => r.url.map(u => u.toString()).join('/'))
+    .join('/');
 
   const query = Object.keys(route.queryParams)
     .filter(k => k !== KEEP_ALIVE_ID)
     .map(k => `${k}=${route.queryParams[k]}`);
 
-  return url.reverse().join('/') + (query.length > 0 ? '?' + query.join('&') : '');
+  return url + (query.length > 0 ? '?' + query.join('&') : '');
 }
