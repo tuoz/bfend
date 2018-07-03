@@ -12,7 +12,7 @@ const fullData = {
     email: 'hypomail@gmail.com',
     acl: {
       roles: ['admin'],
-      abilities: ['dashboard.index', 'manager.index', 'table.index', 'table.edit'],
+      abilities: ['dashboard.index', 'manager.index', 'table.basic.index', 'table.basic.show'],
       super: false
     },
     token: {
@@ -34,8 +34,8 @@ const fullData = {
         {
           text: '列表页',
           icon: 'icon-grid',
-          link: '/table',
-          acl: 'table.index',
+          link: '/table/basic/index',
+          acl: 'table.basic.index',
         },
         {
           text: '小部件',

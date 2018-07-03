@@ -20,8 +20,8 @@ const routes: Route[] = [
         loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'table',
-        data: {acl: 'table.*'},
+        path: 'table/basic',
+        data: {acl: 'table.basic.*'},
         canActivateChild: [BfAuthGuard],
         loadChildren: 'app/table/table.module#TableModule',
       }

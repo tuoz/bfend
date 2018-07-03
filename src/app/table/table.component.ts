@@ -111,11 +111,11 @@ import { finalize } from 'rxjs/operators/finalize';
             <td>{{data.age}}</td>
             <td>{{data.address}}</td>
             <td>
-              <span [acl]="'table.index'">
-                <a [routerLink]="'./' + data.id">详情</a>
+              <span [acl]="'table.basic.show'">
+                <a [routerLink]="'../' + data.id">详情</a>
                 <nz-divider nzType="vertical"></nz-divider>
               </span>
-              <span [acl]="'table.edit'">
+              <span [acl]="'table.basic.edit'">
                 <a (click)="edit(123)">编辑</a>
                 <nz-divider nzType="vertical"></nz-divider>
               </span>

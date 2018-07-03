@@ -6,15 +6,15 @@ import { TableComponent } from './table.component';
 
 const routes: Route[] = [
   {
-    path: '',
+    path: 'index',
     component: TableComponent,
-    data: {acl: 'table.index', 'keep_alive': true},
+    data: {acl: 'table.basic.index'},
     pathMatch: 'full'
   },
   {
     path: ':id',
     component: TableProfileComponent,
-    data: {acl: 'table.index'},
+    data: {acl: 'table.basic.show'},
     pathMatch: 'full'
   }
 
