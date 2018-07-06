@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
 import { BfComponentParameterService } from 'bfend';
 import { ComponentParameter } from 'bfend/src/component-parameter';
 import { NzModalService } from 'ng-zorro-antd';
-import { retry, switchMap } from 'rxjs/operators';
+import { retry, switchMap, takeWhile } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators/finalize';
 import { UserApi } from '../core/api/user.api';
 
@@ -129,7 +129,7 @@ import { UserApi } from '../core/api/user.api';
     </bf-page>
   `
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
   data: any = [];
 
   loading = false;
@@ -151,6 +151,8 @@ export class TableComponent implements OnInit {
 
   private params: ComponentParameter<any>;
 
+  private alive = true;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -166,6 +168,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.params.params$.pipe(
+      takeWhile(() => this.alive),
       switchMap(p => {
         const {page, ...searches} = p;
 
@@ -174,6 +177,7 @@ export class TableComponent implements OnInit {
         this.searches.date = this.searches.date ? new Date(this.searches.date) : null;
 
         this.loading = true;
+
         return this.api.get({
           page,
           page_size: this.page.size,
@@ -185,6 +189,10 @@ export class TableComponent implements OnInit {
       this.data = res.data;
       this.page.total = res.meta.total;
     });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   load() {
