@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
-import { TableApi } from './table.api';
+import { UserApi } from '../core/api/user.api';
 
 @Component({
   template: `
@@ -24,7 +24,7 @@ export class TableProfileComponent implements OnInit {
   data: any = {};
   private alive = true;
 
-  constructor(private route: ActivatedRoute, private api: TableApi) { }
+  constructor(private route: ActivatedRoute, private api: UserApi) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(takeWhile(() => this.alive)).subscribe((params: ParamMap) => {

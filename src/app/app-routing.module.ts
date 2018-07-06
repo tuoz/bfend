@@ -24,6 +24,12 @@ const routes: Route[] = [
         data: {acl: 'table.basic.*'},
         canActivateChild: [BfAuthGuard],
         loadChildren: 'app/table/table.module#TableModule',
+      },
+      {
+        path: 'table/detail',
+        data: {acl: 'table.detail.*'},
+        canActivateChild: [BfAuthGuard],
+        loadChildren: 'app/table-detail/table.module#TableModule',
       }
     ]
   },

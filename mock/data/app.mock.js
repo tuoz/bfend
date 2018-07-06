@@ -12,7 +12,17 @@ const fullData = {
     email: 'hypomail@gmail.com',
     acl: {
       roles: ['admin'],
-      abilities: ['dashboard.index', 'manager.index', 'table.basic.index', 'table.basic.show'],
+      abilities: [
+        'dashboard.index',
+        'manager.index',
+        'table.basic.index',
+        'table.basic.edit',
+        'table.basic.delete',
+        'table.detail.index',
+        'table.detail.show',
+        'table.detail.edit',
+        'table.detail.delete',
+      ],
       super: false
     },
     token: {
@@ -32,18 +42,17 @@ const fullData = {
           translate: 'dashboard_v1'
         },
         {
-          text: '列表页',
+          text: '基本列表',
           icon: 'icon-grid',
           link: '/table/basic/index',
           acl: 'table.basic.index',
         },
         {
-          text: '小部件',
-          translate: 'widgets',
-          link: '/widgets',
-          icon: 'icon-present',
-          badge: 2
-        }
+          text: '详情列表',
+          icon: 'icon-book-open',
+          link: '/table/detail/index',
+          acl: 'table.detail.index',
+        },
       ]
     },
     {

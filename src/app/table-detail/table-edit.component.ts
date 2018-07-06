@@ -5,7 +5,6 @@ import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 import { tap } from 'rxjs/operators/tap';
 import { finalize } from 'rxjs/operators/finalize';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-
 import { UserApi } from '../core/api/user.api';
 
 @Component({

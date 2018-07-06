@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { TableProfileComponent } from './table-profile.component';
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table.component';
 import { TableEditComponent } from './table-edit.component';
 
-const COMPONENTS = [TableComponent, TableEditComponent];
+const COMPONENTS = [TableComponent, TableComponent, TableEditComponent, TableProfileComponent];
 const ENTRY_COMPONENTS = [TableEditComponent];
 
 @NgModule({
