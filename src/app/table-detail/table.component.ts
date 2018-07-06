@@ -1,12 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
-import { BfComponentParameterService } from 'bfend';
-import { BfComponentParameter } from 'bfend/src/component-parameter';
+import { BfComponentParameterService, BfComponentParameter } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
 import { retry, switchMap, takeWhile } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators/finalize';
+import { isDate } from 'rxjs/util/isDate';
 import { UserApi } from '../core/api/user.api';
+
+interface Parameters {
+  page: number;
+  id: string;
+  date: string | Date;
+}
 
 @Component({
   template: `
@@ -14,7 +20,7 @@ import { UserApi } from '../core/api/user.api';
       <ng-template #description>列表页操作演示</ng-template>
 
       <nz-card>
-        <form class="search-form" nz-form [nzLayout]="'inline'" (submit)="onSearch($event)">
+        <form class="search-form" nz-form [nzLayout]="'inline'" (submit)="onSearch($event)" (reset)="onSearchReset($event)">
           <nz-row nzType="flex" [nzGutter]="16">
             <nz-col [nzMd]="8" [nzSm]="24">
               <nz-form-item>
@@ -84,7 +90,7 @@ import { UserApi } from '../core/api/user.api';
           <i class="anticon anticon-plus"></i>
           <span>新建</span>
         </button>
-        
+
         <nz-table
           #nzTable
           [nzData]="data"
@@ -144,12 +150,12 @@ export class TableComponent implements OnInit, OnDestroy {
 
   total = 0;
 
-  searches: {[index: string]: any} = {
+  searches: Pick<Parameters, 'id' | 'date'> = {
     id: null,
-    date: null
+    date: new Date()
   };
 
-  private params: BfComponentParameter<any>;
+  private cp: BfComponentParameter<Parameters>;
 
   private alive = true;
 
@@ -160,29 +166,38 @@ export class TableComponent implements OnInit, OnDestroy {
     private api: UserApi,
     cp: BfComponentParameterService
   ) {
-    this.params = cp.new(TableComponent, {
+    this.cp = cp.new(TableComponent, {
       page: this.page.index,
       ...this.searches
+    }, p => {
+      this.page.index = p.page;
+      this.searches.id = p.id;
+      this.searches.date = typeof p.date === 'string' ? new Date(p.date) : p.date;
+      this.searches.date = isDate(this.searches.date) ? this.searches.date : null;
+      p.date = this.searches.date ? formatDate(this.searches.date) : null;
+
+      return p;
     });
   }
 
   ngOnInit() {
-    this.params.params$.pipe(
+    this.cp.params$.pipe(
       takeWhile(() => this.alive),
-      switchMap(p => {
-        const {page, ...searches} = p;
+      switchMap(() => {
+        const searches = {
+          ...this.searches,
+          date: this.searches.date ? formatDate(this.searches.date as Date) : null
+        };
 
-        this.page.index = page;
-        this.searches = {...this.searches, ...searches};
-        this.searches.date = this.searches.date ? new Date(this.searches.date) : null;
+        const page = {
+          page: this.page.index,
+          page_size: this.page.size
+        };
 
         this.loading = true;
 
-        return this.api.get({
-          page,
-          page_size: this.page.size,
-          ...searches,
-        }).pipe(finalize(() => this.loading = false));
+        return this.api.get(searches, page)
+          .pipe(finalize(() => this.loading = false));
       }),
       retry()
     ).subscribe(res => {
@@ -196,7 +211,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   load() {
-    this.params.set({});
+    this.cp.set({});
   }
 
   edit(id?) {
@@ -215,15 +230,17 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   onPageIndexChange(index) {
-    this.params.set({page: index});
+    this.cp.set({page: index});
   }
 
   onSearch(e) {
     e.preventDefault();
-    this.params.set({
-      ...this.searches,
-      date: this.searches.date ? formatDate(this.searches.date) : null
-    });
+    this.cp.set({...this.searches});
+  }
+
+  onSearchReset(e) {
+    e.preventDefault();
+    this.cp.reset();
   }
 }
 
@@ -231,5 +248,5 @@ function formatDate(date: Date) {
   function pz(n: number) {
     return n < 10 ? `0${n}` : n.toString();
   }
-  return `${date.getFullYear()}-${pz(date.getMonth() + 1)}-${pz(date.getDate())}`
+  return `${date.getFullYear()}-${pz(date.getMonth() + 1)}-${pz(date.getDate())}`;
 }
