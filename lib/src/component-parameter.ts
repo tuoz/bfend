@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { filter, map, mapTo, scan, tap } from 'rxjs/operators';
+import { filter, map, mapTo, tap } from 'rxjs/operators';
 import { merge } from './utils/object';
 
 export class BfComponentParameter<T extends object> {
@@ -13,13 +13,19 @@ export class BfComponentParameter<T extends object> {
 
   private readonly activatedRoute: ActivatedRoute;
 
-  private readonly defaultParams: T;
+  private parameters: T;
 
-  constructor(private cmp: Type<any>, private parameters: T, activatedRoute: ActivatedRoute, private router: Router) {
-    this.defaultParams = Object.assign({}, parameters) as T;
+  constructor(
+    private cmp: Type<any>,
+    private readonly defaultParams: T,
+    private transformer: (p: T) => T,
+    activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
     this.activatedRoute = findActivatedRoute(activatedRoute, this.cmp);
-    this.subject = new BehaviorSubject(merge(this.parameters, this.activatedRoute.snapshot.params || {}));
+    this.subject = new BehaviorSubject(merge({}, defaultParams, this.activatedRoute.snapshot.params || {}));
     this.params$ = this.initParams();
+    this.parameters = Object.assign({}, defaultParams) as T;
 
     this.activatedRoute.params.pipe(
       map(params => Object.keys(params).filter(k => k in this.defaultParams).length),
@@ -36,16 +42,21 @@ export class BfComponentParameter<T extends object> {
     this.subject.next(p);
   }
 
+  reset() {
+    this.subject.next(this.defaultParams);
+  }
+
   private initParams() {
     return this.subject.asObservable().pipe(
       tap(v => console.log(v)),
-      scan<T, Partial<T>>((acc, p) => merge(acc, p), {} as T),
+      map((p: Partial<T>) => (this.parameters = merge(this.parameters, p))),
+      map(p => this.transformer ? (this.parameters = merge(this.parameters, this.transformer(p))) : p),
       tap<T>(p => {
         this.parameters = p;
 
         const params = {...this.activatedRoute.snapshot.params};
 
-        for (let i of Object.keys(p)) {
+        for (const i of Object.keys(p)) {
           if (p[i] != null && p[i] !== '') {
             params[i] = p[i];
           } else {
@@ -60,7 +71,7 @@ export class BfComponentParameter<T extends object> {
 
         setTimeout(() => {
           this.router.navigateByUrl(url, {replaceUrl: true});
-        })
+        });
       })
     );
   }

@@ -8,7 +8,7 @@ export class BfComponentParameterService {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
-  new<T extends object>(cmp: Type<any>, params: T) {
-    return new BfComponentParameter(cmp, params, this.activatedRoute, this.router);
+  new<T extends object>(cmp: Type<any>, defaultParams: T, transformer: (p: T) => T = null) {
+    return new BfComponentParameter(cmp, defaultParams, transformer, this.activatedRoute, this.router);
   }
 }
