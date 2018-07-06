@@ -1,11 +1,11 @@
 import { Type } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { scan, tap, map, filter, mapTo } from 'rxjs/operators';
+import { filter, map, mapTo, scan, tap } from 'rxjs/operators';
 import { merge } from './utils/object';
 
-export class ComponentParameter<T extends object> {
+export class BfComponentParameter<T extends object> {
 
   private readonly subject: BehaviorSubject<Partial<T>>;
 

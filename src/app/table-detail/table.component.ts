@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
 import { BfComponentParameterService } from 'bfend';
-import { ComponentParameter } from 'bfend/src/component-parameter';
+import { BfComponentParameter } from 'bfend/src/component-parameter';
 import { NzModalService } from 'ng-zorro-antd';
 import { retry, switchMap, takeWhile } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators/finalize';
@@ -149,7 +149,7 @@ export class TableComponent implements OnInit, OnDestroy {
     date: null
   };
 
-  private params: ComponentParameter<any>;
+  private params: BfComponentParameter<any>;
 
   private alive = true;
 
