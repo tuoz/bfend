@@ -48,7 +48,6 @@ export class BfComponentParameter<T extends object> {
 
   private initParams() {
     return this.subject.asObservable().pipe(
-      tap(v => console.log(v)),
       map((p: Partial<T>) => (this.parameters = merge(this.parameters, p))),
       map(p => this.transformer ? (this.parameters = merge(this.parameters, this.transformer(p))) : p),
       tap<T>(p => {
