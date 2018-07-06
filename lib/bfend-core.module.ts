@@ -1,7 +1,5 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
-import { BfKeepAliveReuseStrategy } from './src/keep-alive/keep-alive-reuse-strategy';
-import { BfKeepAliveService } from './src/keep-alive/keep-alive.service';
 import { throwIfAlreadyLoaded } from './src/module-import-guard';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AngularWebStorageModule } from 'angular-web-storage';
@@ -22,6 +20,7 @@ import { BfUploadService } from './src/http/upload.service';
 import { BfHttpManagedInterceptor } from './src/http/http-managed.interceptor';
 import { BfAuthInterceptor } from './src/auth/auth.interceptor';
 import { BfHttpInterceptor } from './src/http/http.interceptor';
+import { BfComponentParameterService } from './src/component-parameter.service';
 
 export function jwtOptionsFactory(storage: BfTokenStorage) {
   return {
@@ -59,9 +58,6 @@ export class BfendCoreModule {
   }
 
   static forRoot(options: BfendOptions): ModuleWithProviders {
-
-    options.keep_alive_id = options.keep_alive_id || 'keep';
-
     return {
       ngModule: BfendCoreModule,
       providers: [
@@ -76,8 +72,7 @@ export class BfendCoreModule {
         BfAuthService,
         BfAuthGuard,
         BfUploadService,
-        BfKeepAliveService,
-        {provide: RouteReuseStrategy, useClass: BfKeepAliveReuseStrategy},
+        BfComponentParameterService,
         {provide: NZ_I18N, useValue: zh_CN},
         {provide: BFEND_OPTIONS, useValue: options},
         {

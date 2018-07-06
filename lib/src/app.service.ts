@@ -2,7 +2,7 @@ import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NavigationCancel, NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { combineLatest, filter } from 'rxjs/operators';
+import { combineLatest, filter, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { NzMessageService } from 'ng-zorro-antd';
 import { merge } from 'rxjs/observable/merge';
