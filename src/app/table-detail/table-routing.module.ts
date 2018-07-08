@@ -11,7 +11,7 @@ const routes: Route[] = [
     pathMatch: 'full'
   },
   {
-    path: ':id',
+    path: 'show/:id',
     component: TableProfileComponent,
     data: {acl: 'table.detail.show'},
     pathMatch: 'full'

@@ -34,7 +34,6 @@ export * from './src/http/http.interceptor';
 export * from './src/http/pagination.type';
 export * from './src/options.type';
 export * from './src/component-parameter.service';
-export * from './src/component-parameter';
 
 export * from './src/utils/form';
 export * from './src/module-import-guard';

@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
 import { BfComponentParameterService, BfComponentParameter } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
-import { retry, switchMap, takeWhile } from 'rxjs/operators';
-import { finalize } from 'rxjs/operators/finalize';
+import { retry, switchMap, takeWhile, finalize, tap, catchError } from 'rxjs/operators';
 import { isDate } from 'rxjs/util/isDate';
 import { UserApi } from '../core/api/user.api';
+import { Subject } from 'rxjs/Subject';
+import { empty } from 'rxjs/observable/empty';
 
 interface Parameters {
   page: number;
-  id: string;
+  no: string;
   date: string | Date;
 }
 
@@ -26,7 +27,7 @@ interface Parameters {
               <nz-form-item>
                 <nz-form-label nzFor="no" style="width:95px;">规则编号</nz-form-label>
                 <nz-form-control>
-                  <input nz-input name="no" placeholder="请输入" id="no" [(ngModel)]="searches.id">
+                  <input nz-input name="no" placeholder="请输入" id="no" [(ngModel)]="searches.no">
                 </nz-form-control>
               </nz-form-item>
             </nz-col>
@@ -117,7 +118,7 @@ interface Parameters {
             <td>{{data.address}}</td>
             <td>
               <span acl="table.detail.show">
-                <a [routerLink]="'../' + data.id">详情</a>
+                <a routerLink="./show/{{data.id}}">详情</a>
                 <nz-divider nzType="vertical"></nz-divider>
               </span>
               <span [acl]="'table.detail.edit'">
@@ -150,8 +151,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
   total = 0;
 
-  searches: Pick<Parameters, 'id' | 'date'> = {
-    id: null,
+  searches: Pick<Parameters, 'no' | 'date'> = {
+    no: null,
     date: new Date()
   };
 
@@ -160,20 +161,21 @@ export class TableComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private nzModal: NzModalService,
     private api: UserApi,
-    cp: BfComponentParameterService
+    private route: ActivatedRoute,
+    cp: BfComponentParameterService,
   ) {
-    this.cp = cp.new(TableComponent, {
+    this.cp = cp.create(this.route, {
       page: this.page.index,
       ...this.searches
     }, p => {
       this.page.index = p.page;
-      this.searches.id = p.id;
+      this.searches.no = p.no;
+
       this.searches.date = typeof p.date === 'string' ? new Date(p.date) : p.date;
       this.searches.date = isDate(this.searches.date) ? this.searches.date : null;
+
       p.date = this.searches.date ? formatDate(this.searches.date) : null;
 
       return p;
@@ -196,11 +198,13 @@ export class TableComponent implements OnInit, OnDestroy {
 
         this.loading = true;
 
-        return this.api.get(searches, page)
-          .pipe(finalize(() => this.loading = false));
+        return this.api.get(searches, page).pipe(
+          catchError(() => empty()),
+          finalize(() => this.loading = false)
+        );
       }),
       retry()
-    ).subscribe(res => {
+    ).subscribe((res: any) => {
       this.data = res.data;
       this.page.total = res.meta.total;
     });
@@ -233,12 +237,12 @@ export class TableComponent implements OnInit, OnDestroy {
     this.cp.set({page: index});
   }
 
-  onSearch(e) {
+  onSearch(e: Event) {
     e.preventDefault();
     this.cp.set({...this.searches});
   }
 
-  onSearchReset(e) {
+  onSearchReset(e: Event) {
     e.preventDefault();
     this.cp.reset();
   }

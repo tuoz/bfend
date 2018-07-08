@@ -49,7 +49,7 @@ export class BfSettingsService {
       let layout = null;
 
       try {
-        layout = this.storage.get(`${this.options.app_key}-layout`)
+        layout = this.storage.get(`${this.options.app_key}-layout`);
       } catch (err) {}
 
       if (layout == null) {

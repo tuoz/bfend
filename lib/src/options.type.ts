@@ -5,6 +5,7 @@ export interface BfendOptions {
   api_base_uri: string;
   url_app: string;
   url_login: string;
+  component_parameter_key?: string;
 }
 
 export const BFEND_OPTIONS = new InjectionToken<BfendOptions>('dfend-app-options');

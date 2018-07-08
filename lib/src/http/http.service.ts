@@ -52,23 +52,7 @@ export class BfHttpService {
   }
 
   search(criteria: { [index: string]: any }) {
-    const searches: string[] = [];
-    for (const k of Object.keys(criteria)) {
-      if (criteria[k] != null) {
-        const key = k.toString().replace(/[:;]/g, '');
-        let value = criteria[k];
-
-        if (Array.isArray(value)) {
-          value = value.map(v => v.toString().replace(/[,;]/g, '')).join(',');
-        } else {
-          value = value.toString().replace(/[;]/g, '');
-        }
-
-        searches.push(`${key}:${value}`);
-      }
-    }
-
-    return searches.join(';');
+    return toSearch(criteria);
   }
 
   setLoading(result) {
@@ -86,4 +70,37 @@ export class BfHttpService {
         return cbk();
       });
   }
+}
+
+export function toSearch(criteria: { [index: string]: any }) {
+  const searches: string[] = [];
+  for (const k of Object.keys(criteria)) {
+    if (criteria[k] != null) {
+      const key = k.toString().replace(/[:;]/g, '');
+      let value = criteria[k];
+
+      if (Array.isArray(value)) {
+        value = value.map(v => v.toString().replace(/[,;]/g, '')).join(',');
+      } else {
+        value = value.toString().replace(/[;]/g, '');
+      }
+
+      searches.push(`${key}:${value}`);
+    }
+  }
+
+  return searches.join(';');
+}
+
+export function fromSearch(searches: string): {[index: string]: string} {
+  return searches.split(';').reduce((res, v) => {
+    const i = v.indexOf(':');
+    if (i === -1) {
+      res[v] = '';
+    } else if (i > 0) {
+      res[v.substr(0, i)] = v.substr(i + 1);
+    }
+
+    return res;
+  }, {});
 }
