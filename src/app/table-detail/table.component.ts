@@ -1,13 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { TableEditComponent } from 'app/table/table-edit.component';
 import { BfComponentParameterService, BfComponentParameter } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
-import { retry, switchMap, takeWhile, finalize, tap, catchError } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+import { switchMap, takeWhile, catchError } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
 import { isDate } from 'rxjs/util/isDate';
 import { UserApi } from '../core/api/user.api';
-import { Subject } from 'rxjs/Subject';
-import { empty } from 'rxjs/observable/empty';
 
 interface Parameters {
   page: number;
@@ -166,14 +167,14 @@ export class TableComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     cp: BfComponentParameterService,
   ) {
-    this.cp = cp.create(this.route, {
+    this.cp = cp.create<Parameters>(this.route, {
       page: this.page.index,
       ...this.searches
     }, p => {
       this.page.index = p.page;
       this.searches.no = p.no;
 
-      this.searches.date = typeof p.date === 'string' ? new Date(p.date) : p.date;
+      this.searches.date = new Date(p.date.toString());
       this.searches.date = isDate(this.searches.date) ? this.searches.date : null;
 
       p.date = this.searches.date ? formatDate(this.searches.date) : null;
@@ -198,15 +199,18 @@ export class TableComponent implements OnInit, OnDestroy {
 
         this.loading = true;
 
-        return this.api.get(searches, page).pipe(
-          catchError(() => empty()),
-          finalize(() => this.loading = false)
-        );
+        return this.api.get(searches, page).pipe(catchError(err => of<HttpErrorResponse>(err)));
       }),
-      retry()
-    ).subscribe((res: any) => {
-      this.data = res.data;
-      this.page.total = res.meta.total;
+    ).subscribe(res => {
+      this.loading = false;
+
+      if (res instanceof HttpErrorResponse) {
+        this.data = [];
+        this.page.total = 0;
+      } else {
+        this.data = res.data;
+        this.page.total = res.meta.total;
+      }
     });
   }
 
