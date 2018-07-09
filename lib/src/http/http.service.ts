@@ -98,7 +98,13 @@ export function fromSearch(searches: string): {[index: string]: string} {
     if (i === -1) {
       res[v] = '';
     } else if (i > 0) {
-      res[v.substr(0, i)] = v.substr(i + 1);
+      const key = v.substr(0, i);
+      const value = v.substr(i + 1);
+      if (value.indexOf(',') > -1) {
+        res[key] = value.split(',');
+      } else {
+        res[key] = value;
+      }
     }
 
     return res;
