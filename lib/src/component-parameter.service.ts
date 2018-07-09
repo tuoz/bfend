@@ -71,7 +71,7 @@ export class BfComponentParameter<T> {
       map(p => this.transformer ? Object.assign(this.data, this.transformer(p)) : p),
       tap<T>(p => {
         for (const i of Object.keys(p)) {
-          if (p[i] == null && p[i] === '') {
+          if (p[i] == null || p[i] === '') {
             delete p[i];
           }
         }
