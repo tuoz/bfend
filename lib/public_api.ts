@@ -1,5 +1,4 @@
 export * from './bfend.module';
-export * from './bfend-core.module';
 
 export * from './src/components/layout/layout.component';
 export * from './src/components/layout/fullscreen.component';

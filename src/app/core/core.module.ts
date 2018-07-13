@@ -1,12 +1,12 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { throwIfAlreadyLoaded, BfendCoreModule } from 'bfend';
+import { throwIfAlreadyLoaded, BfendModule } from 'bfend';
 import { environment as env } from '../../environments/environment';
 import { MeApi } from './api/me.api';
 import { UserApi } from './api/user.api';
 
 @NgModule({
   imports: [
-    BfendCoreModule.forRoot({
+    BfendModule.forRoot({
       app_key: env.app_key,
       api_base_uri: env.api_base_uri,
       url_app: '/app',
