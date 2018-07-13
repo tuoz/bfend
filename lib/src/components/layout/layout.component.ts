@@ -39,8 +39,8 @@ export class BfLayoutComponent implements OnInit, OnDestroy {
   private sub = new Subscription();
 
   @Input() bfNav: TemplateRef<any>;
-  @Input() bfLogo: string = 'assets/img/logo-header.svg';
-  @Input() bfProgressColor: string = '#faad14'
+  @Input() bfLogo = 'assets/img/logo-header.svg';
+  @Input() bfProgressColor = '#faad14';
 
   constructor(
     private ngProgress: NgProgress,

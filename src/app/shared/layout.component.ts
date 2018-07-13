@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit {
           .subscribe(() => {
             this.nzMessage.success('修改成功');
             resolve();
-          }, () => resolve(false))
+          }, () => resolve(false));
       })
     });
   }

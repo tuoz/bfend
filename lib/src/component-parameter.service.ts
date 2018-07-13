@@ -7,17 +7,6 @@ import { animationFrame } from 'rxjs/scheduler/animationFrame';
 import { toSearch, fromSearch } from './http/http.service';
 import { BfendOptions, BFEND_OPTIONS } from './options.type';
 
-@Injectable()
-export class BfComponentParameterService {
-
-  constructor(private router: Router, @Inject(BFEND_OPTIONS) private options: BfendOptions) { }
-
-  create<T>(activatedRoute: ActivatedRoute, defaultParams: T, transformer: (p: T) => T = null, key = null) {
-    key = key || this.options.component_parameter_key || 'p';
-    return new BfComponentParameter(activatedRoute, defaultParams, transformer, this.router, key);
-  }
-}
-
 export class BfComponentParameter<T> {
 
   private readonly subject: BehaviorSubject<Partial<T>>;
@@ -84,5 +73,16 @@ export class BfComponentParameter<T> {
         });
       })
     );
+  }
+}
+
+@Injectable()
+export class BfComponentParameterService {
+
+  constructor(private router: Router, @Inject(BFEND_OPTIONS) private options: BfendOptions) { }
+
+  create<T>(activatedRoute: ActivatedRoute, defaultParams: T, transformer: (p: T) => T = null, key = null) {
+    key = key || this.options.component_parameter_key || 'p';
+    return new BfComponentParameter(activatedRoute, defaultParams, transformer, this.router, key);
   }
 }

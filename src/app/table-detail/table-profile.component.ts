@@ -30,7 +30,7 @@ export class TableProfileComponent implements OnInit {
     this.route.paramMap.pipe(takeWhile(() => this.alive)).subscribe((params: ParamMap) => {
       this.id = params.get('id');
       this.load();
-    })
+    });
   }
 
   load() {

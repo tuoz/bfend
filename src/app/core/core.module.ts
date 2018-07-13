@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { throwIfAlreadyLoaded, BfendCoreModule } from 'bfend'
-import { environment as env } from '../../environments/environment'
+import { throwIfAlreadyLoaded, BfendCoreModule } from 'bfend';
+import { environment as env } from '../../environments/environment';
 import { MeApi } from './api/me.api';
 import { UserApi } from './api/user.api';
 
