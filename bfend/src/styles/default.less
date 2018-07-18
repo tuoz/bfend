@@ -1,0 +1,53 @@
+@import "../../../node_modules/ng-zorro-antd/src/ng-zorro-antd.less";
+@import "../../../node_modules/simple-line-icons/less/simple-line-icons.less";
+@import "./theme.less";
+@import "./utils.less";
+
+@import "../lib/components/layout/layout.component.less";
+@import "../lib/components/layout/aside.component.less";
+@import "../lib/components/layout/header.component.less";
+@import "../lib/components/layout/footer.component.less";
+@import "../lib/components/layout/page.component.less";
+
+.acl__hide {
+  display: none !important;
+}
+
+body {
+  padding-right: 0 !important; // NzMadal弹出的时候，不知道为什么，会多加一个 padding
+}
+
+.search-form {
+  &.@{form-prefix-cls}-inline .@{form-prefix-cls}-item-control-wrapper,
+  &.@{form-prefix-cls}-inline .@{form-prefix-cls}-item-label {
+    padding: 0!important
+  }
+
+  .@{form-prefix-cls}-item {
+    margin-bottom: 24px;
+    margin-right: 0;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+
+    > .@{form-prefix-cls}-item-label {
+      width: auto;
+      line-height: 32px;
+      padding-right: 8px
+    }
+
+    .@{form-prefix-cls}-item-control {
+      line-height: 32px
+    }
+
+    &-control-wrapper {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1
+    }
+  }
+}
+
+.@{calendar-prefix-cls}-picker {
+  display: block;
+}

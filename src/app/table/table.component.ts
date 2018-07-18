@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TableEditComponent } from 'app/table/table-edit.component';
+import { TableEditComponent } from './table-edit.component';
 import { NzModalService } from 'ng-zorro-antd';
 import { UserApi } from '../core/api/user.api';
-import { finalize } from 'rxjs/operators/finalize';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   template: `

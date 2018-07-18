@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BfHttpService, PaginatedResult, PaginationParameter, SearchCriteria } from 'bfend';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserApi {
   constructor(private client: HttpClient, private http: BfHttpService) {}
 

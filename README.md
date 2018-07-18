@@ -1,6 +1,6 @@
 # Bfend 后台管理系统模版
 
-## Run 
+## Run
 `npm run start-with-mock`
 
 # Screenshots

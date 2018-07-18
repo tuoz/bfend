@@ -17,19 +17,19 @@ const routes: Route[] = [
         canLoad: [BfAuthGuard],
         data: {acl: 'dashboard.*'},
         canActivateChild: [BfAuthGuard],
-        loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'table/basic',
         data: {acl: 'table.basic.*'},
         canActivateChild: [BfAuthGuard],
-        loadChildren: 'app/table/table.module#TableModule',
+        loadChildren: './table/table.module#TableModule',
       },
       {
         path: 'table/detail',
         data: {acl: 'table.detail.*'},
         canActivateChild: [BfAuthGuard],
-        loadChildren: 'app/table-detail/table.module#TableModule',
+        loadChildren: './table-detail/table.module#TableModule',
       }
     ]
   },

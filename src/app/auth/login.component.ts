@@ -2,10 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Subscription } from 'rxjs/Subscription';
-
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/combineLatest';
+import { Subscription } from 'rxjs';
 
 import { BfAppService, BfSettingsService } from 'bfend';
 import { BfAuthService } from 'bfend';

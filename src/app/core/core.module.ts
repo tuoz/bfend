@@ -1,8 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { throwIfAlreadyLoaded, BfendModule } from 'bfend';
 import { environment as env } from '../../environments/environment';
-import { MeApi } from './api/me.api';
-import { UserApi } from './api/user.api';
 
 @NgModule({
   imports: [
@@ -12,9 +10,6 @@ import { UserApi } from './api/user.api';
       url_app: '/app',
       url_login: '/auth/login'
     })
-  ],
-  providers: [
-    MeApi, UserApi
   ]
 })
 export class CoreModule {

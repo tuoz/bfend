@@ -2,9 +2,7 @@ import { Component, Input, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { touchForm } from 'bfend';
 import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
-import { tap } from 'rxjs/operators/tap';
-import { finalize } from 'rxjs/operators/finalize';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { tap, finalize } from 'rxjs/operators';
 
 import { UserApi } from '../core/api/user.api';
 
@@ -58,7 +56,7 @@ export class TableEditComponent implements OnInit {
             if (this.nzModalRef) {
               this.nzModalRef.triggerCancel();
             }
-            return ErrorObservable.create(err);
+            console.error(err);
           }
         );
     }

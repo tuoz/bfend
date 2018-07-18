@@ -1,13 +1,11 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { TableEditComponent } from 'app/table/table-edit.component';
+import { TableEditComponent } from './table-edit.component';
 import { BfComponentParameterService, BfComponentParameter } from 'bfend';
 import { NzModalService } from 'ng-zorro-antd';
-import { Subject } from 'rxjs/Subject';
+import { Subject, of } from 'rxjs';
 import { switchMap, takeWhile, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
-import { isDate } from 'rxjs/util/isDate';
 import { UserApi } from '../core/api/user.api';
 
 interface Parameters {
@@ -36,7 +34,7 @@ interface Parameters {
               <nz-form-item>
                 <nz-form-label nzFor="status" style="width:95px;">使用时间</nz-form-label>
                 <nz-form-control>
-                  <nz-date-picker [nzStyle]="{width: '100%'}" name="date" [(ngModel)]="searches.date"></nz-date-picker>
+                  <nz-date-picker style="withd:100%" name="date" [(ngModel)]="searches.date"></nz-date-picker>
                 </nz-form-control>
               </nz-form-item>
             </nz-col>
@@ -119,7 +117,7 @@ interface Parameters {
             <td>{{data.address}}</td>
             <td>
               <span acl="table.detail.show">
-                <a routerLink="./show/{{data.id}}">详情</a>
+                <a routerLink="../show/{{data.id}}">详情</a>
                 <nz-divider nzType="vertical"></nz-divider>
               </span>
               <span [acl]="'table.detail.edit'">
@@ -175,7 +173,7 @@ export class TableComponent implements OnInit, OnDestroy {
       this.searches.no = p.no;
 
       this.searches.date = new Date(p.date.toString());
-      this.searches.date = isDate(this.searches.date) ? this.searches.date : null;
+      this.searches.date = !isNaN(+this.searches.date) ? this.searches.date : null;
 
       p.date = this.searches.date ? formatDate(this.searches.date) : null;
 
