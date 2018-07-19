@@ -1,3 +1,4 @@
+import {throwError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {
   HttpErrorResponse,
@@ -7,7 +8,6 @@ import {
   HttpInterceptor as HttpInterceptorInterface,
   HttpRequest
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { tap, finalize, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -52,7 +52,7 @@ export class BfHttpManagedInterceptor implements HttpInterceptorInterface {
           }
         }
 
-        return Observable.throw(err);
+        return throwError(err);
       }),
       finalize(() => {
         if (this.isAutoLoading(req)) {
