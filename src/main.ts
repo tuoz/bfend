@@ -8,7 +8,9 @@ registerLocaleData(zh);
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import 'bfend/lib/preloader/preloader';
+import { initPreloader } from 'bfend';
+
+initPreloader();
 
 if (environment.production) {
   enableProdMode();

@@ -36,3 +36,5 @@ export * from './lib/component-parameter.service';
 
 export * from './lib/utils/form';
 export * from './lib/module-import-guard';
+
+export * from './lib/preloader';
