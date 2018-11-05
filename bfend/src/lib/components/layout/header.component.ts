@@ -1,8 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 import { BfSettingsService } from '../../settings.service';
-import { BfAppService } from '../../app.service';
-import { BfChangePasswordComponent } from '../change-password.component';
-import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'bf-header',
@@ -16,7 +13,7 @@ import { NzModalService } from 'ng-zorro-antd';
       <div class="bf-nav">
         <ul class="bf-nav__menu">
           <li class="bf-nav__menu-item" (click)="toggleAside()">
-            <i class="bf-nav__menu-icon anticon anticon-menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
+            <i nz-icon class="bf-nav__menu-icon" [type]="settings.layout.collapsed ? 'menu-unfold' : 'menu-fold'"></i>
           </li>
         </ul>
 

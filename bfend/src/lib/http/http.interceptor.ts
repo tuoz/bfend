@@ -9,8 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-// noinspection ES6UnusedImports
-import {} from 'zone.js';
+import 'zone.js';
 import { BfApiError } from './api.error';
 
 @Injectable()

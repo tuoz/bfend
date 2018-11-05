@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { filter, scan, switchMap, delay } from 'rxjs/operators';
-// noinspection ES6UnusedImports
-import {} from 'zone.js';
+import 'zone.js';
 import { of, Subject, Observable } from 'rxjs';
 import { BfendOptions, BFEND_OPTIONS } from '../options.type';
 

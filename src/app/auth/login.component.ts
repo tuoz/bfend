@@ -16,16 +16,18 @@ import { BfAuthService } from 'bfend';
         <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
           <nz-form-item>
             <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+              <nz-input-group nzSize="large" [nzPrefix]="prefixUser">
+                <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
                 <input type="text" autofocus nz-input formControlName="username" placeholder="用户名">
               </nz-input-group>
-              <nz-form-explain nz-form-explain *ngIf="form.get('username').dirty&&form.get('username').hasError('required')">用户名必填
+              <nz-form-explain *ngIf="form.get('username').dirty&&form.get('username').hasError('required')">用户名必填
               </nz-form-explain>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control>
-              <nz-input-group nzPrefixIcon="anticon anticon-lock" nzSize="large">
+              <nz-input-group [nzPrefix]="prefixLock" nzSize="large">
+                <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
                 <input type="password" nz-input formControlName="password" placeholder="密码">
               </nz-input-group>
               <nz-form-explain *ngIf="form.get('password').dirty&&form.get('password').hasError('required')">密码必填</nz-form-explain>

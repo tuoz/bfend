@@ -11,14 +11,14 @@ import { MeApi } from '../core/api/me.api';
       <ul class="bf-nav__menu">
         <li class="bf-nav__menu-item">
           <span nz-tooltip nzTitle="修改密码" nzPlacement="bottom" (click)="changePassword()" class="bf-header-nav__menu-link pr-sm pl-sm">
-            <i class="bf-nav__menu-icon anticon anticon-user"></i>
+            <i nz-icon class="bf-nav__menu-icon" type="user"></i>
             {{app.user.name}}
           </span>
         </li>
 
         <li class="bf-nav__menu-item">
-          <a nz-tooltip nzTitle="推出登录" nzPlacement="bottom" (click)="logout()" class="bf-header-nav__menu-link">
-            <i class="bf-nav__menu-icon anticon anticon-logout"></i>
+          <a nz-tooltip nzTitle="退出登录" nzPlacement="bottom" (click)="logout()" class="bf-header-nav__menu-link">
+            <i nz-icon class="bf-nav__menu-icon nz-icon" type="logout"></i>
           </a>
         </li>
       </ul>

@@ -52,9 +52,9 @@ export class BfLayoutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub.add(this.loading$.subscribe(loading => {
       if (loading) {
-        this.ngProgress.start();
+        this.ngProgress.ref().start();
       } else {
-        this.ngProgress.complete();
+        this.ngProgress.ref().complete();
       }
     }));
   }

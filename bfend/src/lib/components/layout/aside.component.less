@@ -45,26 +45,6 @@
 
   // 子菜单
   &_has-children {
-    > .bf-aside-menu__title {
-      &:after {
-        content: "\E61D";
-        font-family: anticon !important;
-        font-style: normal;
-        vertical-align: baseline;
-        text-align: center;
-        text-transform: none;
-        text-rendering: auto;
-        position: absolute;
-        right: 16px;
-        top: 9.5px;
-        display: inline-block;
-        font-size: 12px;
-        transform: scale(.66666667) rotate(0);
-        transition: transform, color .3s cubic-bezier(.645, .045, .355, 1), ease-in-out;
-        zoom: 1;
-      }
-    }
-
     > .bf-aside-menu {
       display: none;
       .bf-aside-menu__title {
@@ -75,14 +55,29 @@
 
   // 展开
   &_explosed {
-    .bf-aside-menu__item_has-children:after {
-      transform: scale(.66666667) rotate(180deg);
-    }
-
     > .bf-aside-menu {
       display: block;
     }
   }
+}
+
+.bf-aside-menu__arrow {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  width: 9px;
+  height: 9px;
+  transform: rotate(0);
+  transition: transform, color .3s cubic-bezier(.645, .045, .355, 1), ease-in-out;
+
+  > svg {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+.bf-aside-menu__arrow_up {
+  transform: rotate(180deg);
 }
 
 .bf-aside-highlight() {

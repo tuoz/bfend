@@ -80,14 +80,14 @@ interface Parameters {
               <button nz-button type="reset" class="mx-sm">重置</button>
               <a (click)="expandForm=!expandForm">
                 {{expandForm ? '收起' : '展开'}}
-                <i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i>
+                <i nz-icon [type]="expandForm ? 'up' : 'down'"></i>
               </a>
             </nz-col>
           </nz-row>
         </form>
 
         <button nz-button [nzType]="'primary'" (click)="edit()" class="mb-sm">
-          <i class="anticon anticon-plus"></i>
+          <i nz-icon type="plus"></i>
           <span>新建</span>
         </button>
 

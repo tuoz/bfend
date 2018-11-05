@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Menu, BfMenuService } from '../../menu.service';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Menu, BfMenuService} from '../../menu.service';
 
 @Component({
   selector: 'bf-aside',
@@ -42,9 +42,13 @@ import { Menu, BfMenuService } from '../../menu.service';
             </a>
             <!-- has children -->
             <span class="bf-aside-menu__text" *ngIf="menu._type === 3">
-          {{ menu.text }}
-        </span>
+              {{ menu.text }}
+            </span>
             <nz-badge *ngIf="menu.badge" [nzCount]="menu.badge" [nzDot]="menu.badge_dot || false"></nz-badge>
+            <i nz-icon class="bf-aside-menu__arrow"
+               *ngIf="menu._type == 3"
+               [ngClass]="{'bf-aside-menu__arrow_up': menu._open}"
+               type="down"></i>
           </div>
           <ul class="bf-aside-menu" *ngIf="menu._type === 3">
             <li class="bf-aside-menu__item menu__item_leaf"
@@ -62,8 +66,8 @@ import { Menu, BfMenuService } from '../../menu.service';
                 </a>
                 <!-- has children -->
                 <span class="bf-aside-menu__text" *ngIf="m._type === 3">
-              {{ m.text }}
-            </span>
+                  {{ m.text }}
+                </span>
                 <nz-badge *ngIf="m.badge" [nzCount]="m.badge" [nzDot]="m.badge_dot || false"></nz-badge>
               </div>
             </li>
